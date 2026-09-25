@@ -1,0 +1,114 @@
+.banner-slider-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  background: #fdfaf7;
+  /* Aspect ratio for the banner (e.g. 16:5 or standard hero banner) */
+  aspect-ratio: 16 / 5; 
+}
+
+.banner-slider-placeholder {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 5;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0e9e1;
+  color: #887b75;
+  font-weight: 500;
+}
+
+.banner-slider-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.banner-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.banner-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(4px);
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #333;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  transition: all 0.3s;
+  z-index: 10;
+}
+
+.banner-nav-btn:hover {
+  background: white;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.banner-nav-btn.prev {
+  left: 20px;
+}
+
+.banner-nav-btn.next {
+  right: 20px;
+}
+
+.banner-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.banner-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.banner-dot.active {
+  background: white;
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .banner-slider-container {
+    aspect-ratio: 16 / 9; /* Taller for mobile */
+  }
+  .banner-nav-btn {
+    width: 36px;
+    height: 36px;
+  }
+}

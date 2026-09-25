@@ -1,0 +1,272 @@
+.consultations-section {
+  padding: 80px 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.consultations-container {
+  padding: 80px 5%;
+}
+
+.consultations-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.lotus-icon {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lotus-icon::before, .lotus-icon::after {
+  content: "";
+  height: 1px;
+  width: 60px;
+  background-color: #E0C8B0;
+  margin: 0 15px;
+}
+
+.consultations-title {
+  font-family: 'Cinzel', serif;
+  font-size: 42px;
+  color: #2A1C15;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+}
+
+.consultations-title .highlight-text {
+  color: #E04E15;
+}
+
+.consultations-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+}
+
+.consultations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.consultation-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #EAEAEA;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.consultation-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+}
+
+.card-icon-wrapper {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  position: relative;
+  z-index: 2;
+  perspective: 1000px;
+}
+
+@keyframes float3d {
+  0% { 
+    transform: translateY(0) rotateX(0deg) rotateY(0deg) scale(1); 
+    filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1));
+  }
+  50% { 
+    transform: translateY(-6px) rotateX(10deg) rotateY(15deg) scale(1.1); 
+    filter: drop-shadow(4px 12px 8px rgba(0,0,0,0.15));
+  }
+  100% { 
+    transform: translateY(0) rotateX(0deg) rotateY(0deg) scale(1); 
+    filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1));
+  }
+}
+
+.card-icon {
+  display: flex;
+  transform-style: preserve-3d;
+  animation: float3d 4s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.consultation-card:hover .card-icon {
+  animation: float3d 2s ease-in-out infinite;
+}
+
+.card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  color: #2A1C15;
+  margin: 0 0 12px 0;
+  font-weight: 700;
+}
+
+.card-desc {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+  min-height: 42px;
+}
+
+.card-divider {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 15px 0 25px 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+}
+
+.divider-diamond {
+  width: 8px;
+  height: 8px;
+  transform: rotate(45deg);
+  margin: 0 15px;
+}
+
+.card-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+  width: 100%;
+  text-align: left;
+  flex-grow: 1;
+}
+
+.card-features li {
+  display: flex;
+  align-items: center;
+  font-size: 13.5px;
+  color: #444;
+  margin-bottom: 12px;
+}
+
+.feature-check {
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.card-action-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Theme: Yellow (Muhurtam) */
+.theme-yellow {
+  border-color: #F8EDD3;
+}
+.theme-yellow .card-icon-wrapper {
+  background-color: #FFF9E6;
+  color: #D4A017;
+  border: 1px solid #F5E5B8;
+}
+.theme-yellow .divider-line { background-color: #F5E5B8; }
+.theme-yellow .divider-diamond { background-color: #D4A017; }
+.theme-yellow .feature-check { color: #D4A017; }
+.theme-yellow .btn-book {
+  background-color: #D4A017;
+  color: #fff;
+}
+.theme-yellow .btn-book:hover {
+  background-color: #b88a14;
+}
+
+/* Theme: Orange (Vaastu) */
+.theme-orange {
+  border-color: #FDE8DD;
+}
+.theme-orange .card-icon-wrapper {
+  background-color: #FFF0E8;
+  color: #E04E15;
+  border: 1px solid #FAD1BE;
+}
+.theme-orange .divider-line { background-color: #FAD1BE; }
+.theme-orange .divider-diamond { background-color: #E04E15; }
+.theme-orange .feature-check { color: #E04E15; }
+.theme-orange .btn-book {
+  background-color: #E04E15;
+  color: #fff;
+}
+.theme-orange .btn-book:hover {
+  background-color: #c44211;
+}
+
+/* Theme: Purple (Horoscope) */
+.theme-purple {
+  border-color: #EFE6F7;
+}
+.theme-purple .card-icon-wrapper {
+  background-color: #F7EFFF;
+  color: #8A4BCC;
+  border: 1px solid #E4D1F5;
+}
+.theme-purple .divider-line { background-color: #E4D1F5; }
+.theme-purple .divider-diamond { background-color: #8A4BCC; }
+.theme-purple .feature-check { color: #8A4BCC; }
+.theme-purple .btn-book {
+  background-color: #8A4BCC;
+  color: #fff;
+}
+.theme-purple .btn-book:hover {
+  background-color: #713ba8;
+}
+
+/* Theme: Green (Book Pandit) */
+.theme-green {
+  border-color: #E6F0E7;
+}
+.theme-green .card-icon-wrapper {
+  background-color: #EFF7F0;
+  color: #4A7C59;
+  border: 1px solid #CDE0D0;
+}
+.theme-green .divider-line { background-color: #CDE0D0; }
+.theme-green .divider-diamond { background-color: #4A7C59; }
+.theme-green .feature-check { color: #4A7C59; }
+.theme-green .btn-book {
+  background-color: #4A7C59;
+  color: #fff;
+}
+.theme-green .btn-book:hover {
+  background-color: #3b6648;
+}
+
+@media (max-width: 768px) {
+  .consultations-title {
+    font-size: 32px;
+  }
+}
