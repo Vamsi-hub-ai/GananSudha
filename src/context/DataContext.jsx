@@ -17,6 +17,7 @@ export const DataProvider = ({ children }) => {
   const [customers, setCustomers] = useState([]);
   const [currentCustomer, setCurrentCustomer] = useState(null);
   const [currentPandit, setCurrentPandit] = useState(null);
+  const [currentAdmin, setCurrentAdmin] = useState(null);
   const [cart, setCart] = useState([]);
   const [orders, setOrders] = useState([]);
   const [coupons, setCoupons] = useState([]);
@@ -53,6 +54,9 @@ export const DataProvider = ({ children }) => {
       
       const savedPandit = localStorage.getItem('gs_current_pandit');
       if (savedPandit) setCurrentPandit(JSON.parse(savedPandit));
+
+      const savedAdmin = localStorage.getItem('gs_current_admin');
+      if (savedAdmin) setCurrentAdmin(JSON.parse(savedAdmin));
       
       const savedCart = localStorage.getItem('gs_cart');
       if (savedCart) setCart(JSON.parse(savedCart));
@@ -69,6 +73,11 @@ export const DataProvider = ({ children }) => {
     if (currentPandit) localStorage.setItem('gs_current_pandit', JSON.stringify(currentPandit));
     else localStorage.removeItem('gs_current_pandit');
   }, [currentPandit]);
+
+  useEffect(() => {
+    if (currentAdmin) localStorage.setItem('gs_current_admin', JSON.stringify(currentAdmin));
+    else localStorage.removeItem('gs_current_admin');
+  }, [currentAdmin]);
 
   useEffect(() => {
     localStorage.setItem('gs_cart', JSON.stringify(cart));
@@ -212,6 +221,7 @@ export const DataProvider = ({ children }) => {
           const data = await res.json();
           if (data.type === 'customer') setCurrentCustomer(data.user);
           if (data.type === 'pandit') setCurrentPandit(data.user);
+          if (data.type === 'admin') setCurrentAdmin(data.user);
           return data;
       }
     } catch (e) {
@@ -229,6 +239,7 @@ export const DataProvider = ({ children }) => {
   const logout = async () => {
     setCurrentCustomer(null);
     setCurrentPandit(null);
+    setCurrentAdmin(null);
   };
 
   const updateConsultation = async (id, updatedData) => {
@@ -294,7 +305,7 @@ export const DataProvider = ({ children }) => {
       categories, addCategory, deleteCategory,
       products, addProduct, deleteProduct, updateProduct,
       paymentSettings, updatePaymentSettings,
-      adminUsers, addAdminUser, deleteAdminUser, updateAdminUser,
+      adminUsers, addAdminUser, deleteAdminUser, updateAdminUser, currentAdmin, setCurrentAdmin,
       customers, registerCustomer, updateCustomer, currentCustomer, setCurrentCustomer,
       cart, orders, unifiedLogin, loginWithGoogle, logout,
       addToCart, removeFromCart, clearCart, placeOrder, updateOrder,

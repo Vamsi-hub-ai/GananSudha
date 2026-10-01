@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import {
   LayoutDashboard, ShoppingBag, Box, Grid, Archive, Star, Flame,
   UserSquare2, CalendarDays, Users, CreditCard, Ticket, MessageSquare,
@@ -52,11 +53,6 @@ const resizeImage = (file, callback) => {
 function AdminDashboard() {
   const [activeMenu, setActiveMenu] = useState('Dashboard');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentAdminUser, setCurrentAdminUser] = useState(null);
-  const [loginId, setLoginId] = useState('');
-  const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState(false);
 
   // Global Context State
   const {
@@ -66,11 +62,13 @@ function AdminDashboard() {
     products, addProduct, deleteProduct, updateProduct,
     categories, addCategory, deleteCategory,
     paymentSettings, updatePaymentSettings,
-    adminUsers, addAdminUser, deleteAdminUser,
+    adminUsers, addAdminUser, deleteAdminUser, currentAdmin, setCurrentAdmin, logout,
     orders, updateOrder,
     customers, coupons, addCoupon, deleteCoupon,
     consultations, setConsultations
   } = useContext(DataContext);
+  const currentAdminUser = currentAdmin;
+  const setCurrentAdminUser = setCurrentAdmin;
   const [selectedOrder, setSelectedOrder] = useState(null);
   
   // Filter State
@@ -212,29 +210,8 @@ function AdminDashboard() {
   const [newCouponDiscount, setNewCouponDiscount] = useState('');
   const [newCouponExpiry, setNewCouponExpiry] = useState('');
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    let admin = adminUsers.find(user => user.username === loginId && user.password === password);
-
-    // Fallback if DB fetch fails
-    if (!admin && loginId === 'vamsi' && password === 'vamsi') {
-      admin = { username: 'vamsi', password: 'vamsi' };
-    }
-
-    if (admin) {
-      setIsAuthenticated(true);
-      setCurrentAdminUser(admin);
-      setLoginError(false);
-    } else {
-      setLoginError(true);
-    }
-  };
-
   const handleLogout = () => {
-    setIsAuthenticated(false);
-    setCurrentAdminUser(null);
-    setLoginId('');
-    setPassword('');
+    logout();
   };
 
   const menuSections = [
@@ -284,44 +261,8 @@ function AdminDashboard() {
     }
   ];
 
-  if (!isAuthenticated) {
-    return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#F8F9FB' }}>
-        <div style={{ background: '#fff', padding: '48px', borderRadius: '24px', boxShadow: '0 8px 32px rgba(0,0,0,0.05)', width: '100%', maxWidth: '400px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-            <img src="/assets/logo.jpeg" alt="Logo" style={{ height: '80px', marginBottom: '16px', objectFit: 'contain' }} />
-            <h2 style={{ fontFamily: 'Cinzel, serif', color: '#D32F2F', margin: 0 }}>GNANA SUDHA</h2>
-            <p style={{ color: '#8C8C8C', marginTop: '8px', fontSize: 14 }}>Admin Portal Login</p>
-          </div>
-          <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <div>
-              <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '8px', color: '#1A1A1A' }}>Admin ID</label>
-              <input
-                type="text"
-                value={loginId}
-                onChange={(e) => setLoginId(e.target.value)}
-                style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #EBEBEB', outline: 'none', fontSize: 14 }}
-                placeholder="Enter Admin ID"
-              />
-            </div>
-            <div>
-              <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '8px', color: '#1A1A1A' }}>Password</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #EBEBEB', outline: 'none', fontSize: 14 }}
-                placeholder="Enter Password"
-              />
-            </div>
-            {loginError && <p style={{ color: '#F5222D', fontSize: '12px', margin: 0 }}>Invalid credentials. Please try again.</p>}
-            <button type="submit" style={{ background: '#D32F2F', color: '#fff', padding: '12px', borderRadius: '8px', fontWeight: 500, border: 'none', cursor: 'pointer', marginTop: '8px', fontSize: 14 }}>
-              Sign In
-            </button>
-          </form>
-        </div>
-      </div>
-    );
+  if (!currentAdmin) {
+    return <Navigate to="/login" replace />;
   }
   const downloadCSV = () => {
     let displayOrders = activeMenu === 'Bookings' 

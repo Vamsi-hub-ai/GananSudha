@@ -90,8 +90,14 @@ CREATE TABLE IF NOT EXISTS consultations (
 
 -- Insert Default Admin
 INSERT INTO admin_users (username, password, name) 
-VALUES ('admin', 'password', 'Admin User') 
+VALUES ('admin', 'password', 'Admin User'),
+       ('Gnanasudha18@gmail.com', 'GnanaSudha@336', 'Gnana Sudha Admin')
 ON CONFLICT DO NOTHING;
+
+-- Insert Default Customer
+INSERT INTO customers (name, email, password)
+VALUES ('Vamsi', 'Vamsipallela31@gmail.com', 'Vamsi@123')
+ON CONFLICT (email) DO NOTHING;
 
 -- Insert Default Consultations
 INSERT INTO consultations (id, title, price, "discountPrice") VALUES

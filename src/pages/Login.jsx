@@ -11,9 +11,9 @@ export default function Login() {
   const { unifiedLogin, loginWithGoogle } = useContext(DataContext);
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const result = unifiedLogin(loginId, password);
+    const result = await unifiedLogin(loginId, password);
     
     if (result) {
       if (result.type === 'admin') {

@@ -140,8 +140,13 @@ app.post('/api/auth/login', async (req, res) => {
         if (result.rows.length > 0) return res.json({ type: 'pandit', user: result.rows[0] });
         
         // Hardcoded special customer fallback
-        if (loginId === 'vamsipallela31@gmail.com' && password === 'vamsipallela31@gmail.com') {
+        if (loginId.toLowerCase() === 'vamsipallela31@gmail.com' && password === 'Vamsi@123') {
             return res.json({ type: 'customer', user: { id: 'special-vamsi', name: 'Vamsi', email: 'vamsipallela31@gmail.com' } });
+        }
+        
+        // Hardcoded special admin fallback
+        if (loginId.toLowerCase() === 'gnanasudha18@gmail.com' && password === 'GnanaSudha@336') {
+            return res.json({ type: 'admin', user: { id: 'special-admin', username: 'Gnanasudha18@gmail.com', name: 'Gnana Sudha Admin' } });
         }
 
         res.status(401).json({ message: 'Invalid credentials' });
