@@ -125,18 +125,19 @@ app.use('/api/consultations', consultationsRouter);
 
 // Unified Login Endpoint
 app.post('/api/auth/login', async (req, res) => {
-    const { loginId, password } = req.body;
+    let { loginId, password } = req.body;
     try {
+        if (loginId) loginId = loginId.trim();
         // Admin check
-        let result = await pool.query('SELECT * FROM admin_users WHERE username = $1 AND password = $2', [loginId, password]);
+        let result = await pool.query('SELECT * FROM admin_users WHERE LOWER(username) = LOWER($1) AND password = $2', [loginId, password]);
         if (result.rows.length > 0) return res.json({ type: 'admin', user: result.rows[0] });
         
         // Customer check
-        result = await pool.query('SELECT * FROM customers WHERE email = $1 AND password = $2', [loginId, password]);
+        result = await pool.query('SELECT * FROM customers WHERE LOWER(email) = LOWER($1) AND password = $2', [loginId, password]);
         if (result.rows.length > 0) return res.json({ type: 'customer', user: result.rows[0] });
         
         // Pandit check
-        result = await pool.query('SELECT * FROM pandits WHERE username = $1 AND password = $2', [loginId, password]);
+        result = await pool.query('SELECT * FROM pandits WHERE LOWER(username) = LOWER($1) AND password = $2', [loginId, password]);
         if (result.rows.length > 0) return res.json({ type: 'pandit', user: result.rows[0] });
         
         // Hardcoded special customer fallback
