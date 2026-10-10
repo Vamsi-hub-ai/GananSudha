@@ -16,7 +16,10 @@ const PORT = process.env.PORT || 5000;
 const initDB = async () => {
     try {
         const schema = fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf8');
-        await pool.query(schema);
+        const queries = schema.split(';').filter(q => q.trim() !== '');
+        for (let q of queries) {
+            await pool.query(q);
+        }
         console.log("Database initialized.");
     } catch (err) {
         console.error("Error initializing DB:", err);
@@ -29,7 +32,7 @@ const generateCRUD = (tableName, extraRoutes = null) => {
     
     router.get('/', async (req, res) => {
         try {
-            const { rows } = await pool.query(`SELECT * FROM ${tableName} ORDER BY id ASC`);
+            const [rows] = await pool.query(`SELECT * FROM ${tableName} ORDER BY id ASC`);
             res.json(rows);
         } catch (err) { res.status(500).json({ error: err.message }); }
     });
@@ -38,9 +41,10 @@ const generateCRUD = (tableName, extraRoutes = null) => {
         try {
             const keys = Object.keys(req.body);
             const values = Object.values(req.body);
-            const placeholders = keys.map((_, i) => `$${i + 1}`).join(',');
-            const query = `INSERT INTO ${tableName} (${keys.map(k => `"${k}"`).join(',')}) VALUES (${placeholders}) RETURNING *`;
-            const { rows } = await pool.query(query, values);
+            const placeholders = keys.map(() => `?`).join(',');
+            const query = `INSERT INTO ${tableName} (${keys.map(k => `\`${k}\``).join(',')}) VALUES (${placeholders})`;
+            const [result] = await pool.query(query, values);
+            const [rows] = await pool.query(`SELECT * FROM ${tableName} WHERE id = ?`, [result.insertId]);
             res.status(201).json(rows[0]);
         } catch (err) { res.status(500).json({ error: err.message }); }
     });
@@ -50,9 +54,10 @@ const generateCRUD = (tableName, extraRoutes = null) => {
             const { id } = req.params;
             const keys = Object.keys(req.body);
             const values = Object.values(req.body);
-            const updates = keys.map((k, i) => `"${k}" = $${i + 1}`).join(',');
-            const query = `UPDATE ${tableName} SET ${updates} WHERE id = $${keys.length + 1} RETURNING *`;
-            const { rows } = await pool.query(query, [...values, id]);
+            const updates = keys.map((k) => `\`${k}\` = ?`).join(',');
+            const query = `UPDATE ${tableName} SET ${updates} WHERE id = ?`;
+            await pool.query(query, [...values, id]);
+            const [rows] = await pool.query(`SELECT * FROM ${tableName} WHERE id = ?`, [id]);
             res.json(rows[0]);
         } catch (err) { res.status(500).json({ error: err.message }); }
     });
@@ -60,7 +65,7 @@ const generateCRUD = (tableName, extraRoutes = null) => {
     router.delete('/:id', async (req, res) => {
         try {
             const { id } = req.params;
-            await pool.query(`DELETE FROM ${tableName} WHERE id = $1`, [id]);
+            await pool.query(`DELETE FROM ${tableName} WHERE id = ?`, [id]);
             res.json({ message: 'Deleted successfully' });
         } catch (err) { res.status(500).json({ error: err.message }); }
     });
@@ -82,10 +87,11 @@ app.use('/api/customers', generateCRUD('customers', (router) => {
     router.post('/register', async (req, res) => {
         try {
             const { name, email, password } = req.body;
-            const existing = await pool.query('SELECT * FROM customers WHERE email = $1', [email]);
-            if (existing.rows.length > 0) return res.status(400).json({ success: false, message: 'Email ID already exists' });
+            const [existing] = await pool.query('SELECT * FROM customers WHERE email = ?', [email]);
+            if (existing.length > 0) return res.status(400).json({ success: false, message: 'Email ID already exists' });
             
-            const { rows } = await pool.query('INSERT INTO customers (name, email, password) VALUES ($1, $2, $3) RETURNING *', [name, email, password]);
+            const [result] = await pool.query('INSERT INTO customers (name, email, password) VALUES (?, ?, ?)', [name, email, password]);
+            const [rows] = await pool.query('SELECT * FROM customers WHERE id = ?', [result.insertId]);
             res.json({ success: true, user: rows[0] });
         } catch (err) { res.status(500).json({ success: false, message: err.message }); }
     });
@@ -96,14 +102,15 @@ app.use('/api/pandits', generateCRUD('pandits', (router) => {
     router.post('/register', async (req, res) => {
         try {
             const { name, email, password, phone, specialization } = req.body;
-            const existing = await pool.query('SELECT * FROM pandits WHERE username = $1', [email]);
-            if (existing.rows.length > 0) return res.status(400).json({ success: false, message: 'Email ID already exists' });
+            const [existing] = await pool.query('SELECT * FROM pandits WHERE username = ?', [email]);
+            if (existing.length > 0) return res.status(400).json({ success: false, message: 'Email ID already exists' });
             
-            const { rows } = await pool.query(
+            const [result] = await pool.query(
                 `INSERT INTO pandits (name, username, password, phone, specialization, status) 
-                 VALUES ($1, $2, $3, $4, $5, 'Pending') RETURNING *`, 
+                 VALUES (?, ?, ?, ?, ?, 'Pending')`, 
                 [name, email, password, phone, specialization || 'General Rituals']
             );
+            const [rows] = await pool.query('SELECT * FROM pandits WHERE id = ?', [result.insertId]);
             res.json({ success: true, user: rows[0] });
         } catch (err) { res.status(500).json({ success: false, message: err.message }); }
     });
@@ -112,13 +119,14 @@ app.use('/api/pandits', generateCRUD('pandits', (router) => {
 // Consultations custom (string IDs)
 const consultationsRouter = express.Router();
 consultationsRouter.get('/', async (req, res) => {
-    const { rows } = await pool.query(`SELECT * FROM consultations`);
+    const [rows] = await pool.query(`SELECT * FROM consultations`);
     res.json(rows);
 });
 consultationsRouter.put('/:id', async (req, res) => {
     const { id } = req.params;
     const { price, discountPrice } = req.body;
-    const { rows } = await pool.query(`UPDATE consultations SET price = $1, "discountPrice" = $2 WHERE id = $3 RETURNING *`, [price, discountPrice, id]);
+    await pool.query(`UPDATE consultations SET price = ?, \`discountPrice\` = ? WHERE id = ?`, [price, discountPrice, id]);
+    const [rows] = await pool.query(`SELECT * FROM consultations WHERE id = ?`, [id]);
     res.json(rows[0]);
 });
 app.use('/api/consultations', consultationsRouter);
@@ -129,16 +137,16 @@ app.post('/api/auth/login', async (req, res) => {
     try {
         if (loginId) loginId = loginId.trim();
         // Admin check
-        let result = await pool.query('SELECT * FROM admin_users WHERE LOWER(username) = LOWER($1) AND password = $2', [loginId, password]);
-        if (result.rows.length > 0) return res.json({ type: 'admin', user: result.rows[0] });
+        let [rows] = await pool.query('SELECT * FROM admin_users WHERE LOWER(username) = LOWER(?) AND password = ?', [loginId, password]);
+        if (rows.length > 0) return res.json({ type: 'admin', user: rows[0] });
         
         // Customer check
-        result = await pool.query('SELECT * FROM customers WHERE LOWER(email) = LOWER($1) AND password = $2', [loginId, password]);
-        if (result.rows.length > 0) return res.json({ type: 'customer', user: result.rows[0] });
+        [rows] = await pool.query('SELECT * FROM customers WHERE LOWER(email) = LOWER(?) AND password = ?', [loginId, password]);
+        if (rows.length > 0) return res.json({ type: 'customer', user: rows[0] });
         
         // Pandit check
-        result = await pool.query('SELECT * FROM pandits WHERE LOWER(username) = LOWER($1) AND password = $2', [loginId, password]);
-        if (result.rows.length > 0) return res.json({ type: 'pandit', user: result.rows[0] });
+        [rows] = await pool.query('SELECT * FROM pandits WHERE LOWER(username) = LOWER(?) AND password = ?', [loginId, password]);
+        if (rows.length > 0) return res.json({ type: 'pandit', user: rows[0] });
         
         // Hardcoded special customer fallback
         if (loginId.toLowerCase() === 'vamsipallela31@gmail.com' && password === 'Vamsi@123') {
