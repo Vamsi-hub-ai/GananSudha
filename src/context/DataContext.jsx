@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 
 const iconPooja = '/assets/pooja_icon_1782464580440.png';
 const iconHomam = '/assets/homam_icon_1782464611688.png';
-const API_URL = 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 export const DataContext = createContext();
 
