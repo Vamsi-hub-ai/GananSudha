@@ -45,6 +45,10 @@ const ROUTE_SEO = {
   '/profile': {
     title: 'Customer Profile & Spiritual Bookings | Gnana Sudha',
     description: 'Manage your profile, Vedic Sankalpam details, orders, and ritual bookings.'
+  },
+  '/videos': {
+    title: 'Watch Sacred Devotional Videos & Vedic Rituals | Gnana Sudha',
+    description: 'Explore poojas, homams, spiritual guidance, temple traditions, and devotional videos from Gnana Sudha.'
   }
 };
 
@@ -86,8 +90,17 @@ export default function PageSEO() {
 
       const canonical = document.querySelector('link[rel="canonical"]');
       if (canonical) canonical.setAttribute('href', `https://gnanasudha.com${pathname === '/' ? '' : pathname}`);
+
+      // Google Analytics 4 Route Navigation Tracking
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        window.gtag('config', 'G-PMD70ZVL46', {
+          page_path: pathname + location.search,
+          page_title: seoData.title,
+          page_location: window.location.href
+        });
+      }
     }
-  }, [location.pathname]);
+  }, [location.pathname, location.search]);
 
   return null;
 }
