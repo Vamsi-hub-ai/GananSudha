@@ -160,6 +160,10 @@ const runMigrations = async () => {
         "ALTER TABLE pandits MODIFY COLUMN username VARCHAR(255) NULL",
         "ALTER TABLE pandits MODIFY COLUMN password VARCHAR(255) NULL DEFAULT 'password123'",
         "ALTER TABLE pandits MODIFY COLUMN status VARCHAR(50) DEFAULT 'Approved'",
+        "ALTER TABLE poojas ADD COLUMN img LONGTEXT NULL",
+        "ALTER TABLE homams ADD COLUMN img LONGTEXT NULL",
+        "ALTER TABLE products ADD COLUMN image LONGTEXT NULL",
+        "ALTER TABLE categories ADD COLUMN image LONGTEXT NULL",
         "ALTER TABLE poojas MODIFY COLUMN img LONGTEXT NULL",
         "ALTER TABLE homams MODIFY COLUMN img LONGTEXT NULL",
         "ALTER TABLE products MODIFY COLUMN image LONGTEXT NULL",
@@ -948,6 +952,7 @@ festivalsRouter.post('/recalculate', async (req, res) => {
 });
 
 app.use('/api/festivals', festivalsRouter);
+app.use('/api/admin/festivals', festivalsRouter);
 
 // Banner Management API & Persistent Static Uploads
 const { bannerRouter, UPLOADS_DIR } = require('./bannerRouter');
@@ -988,6 +993,7 @@ app.use('/api/admin/banners', bannerRouter);
 // YouTube Videos Management API (Public & Admin)
 const { youtubeRouter, adminYouTubeRouter } = require('./youtubeRouter');
 app.use('/api/youtube-videos', youtubeRouter);
+app.use('/api/youtube', youtubeRouter);
 app.use('/api/admin/youtube-videos', adminYouTubeRouter);
 
 // Unified Login Endpoint

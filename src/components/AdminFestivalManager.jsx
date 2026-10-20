@@ -41,7 +41,7 @@ const DEFAULT_MONTH = 10;
 export default function AdminFestivalManager() {
   const [selectedYear, setSelectedYear] = useState(DEFAULT_YEAR);
   const [selectedMonth, setSelectedMonth] = useState(DEFAULT_MONTH);
-  const [festivals, setFestivals] = useState([]);
+  const [festivals, setFestivals] = useState(() => calculateClientFestivals(DEFAULT_YEAR, DEFAULT_MONTH));
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');

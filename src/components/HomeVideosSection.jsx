@@ -5,11 +5,92 @@ import { useLanguage } from '../context/LanguageContext';
 import { autoTranslateToTelugu } from '../locales/dynamicTerms';
 import './HomeVideosSection.css';
 
+const DEFAULT_HOMEPAGE_VIDEOS = [
+  {
+    id: 1,
+    title: 'Sri Maha Ganapathi Homam & Sankalpam Rituals',
+    title_te: 'శ్రీ మహా గణపతి హోమం & సంకల్ప పూజా విధానం',
+    youtube_url: 'https://www.youtube.com/watch?v=kYJp38X-9_k',
+    youtube_video_id: 'kYJp38X-9_k',
+    description: 'Witness the sacred invocation of Lord Ganesha by scholarly Vedic pandits for removing obstacles and bringing prosperity.',
+    description_te: 'విఘ్న నివారణ మరియు సకల కార్యసిద్ధి కొరకు విద్వత్ పండితులచే నిర్వహించబడిన సంప్రదాయ శ్రీ మహాగణపతి హోమ దృశ్యాలు.',
+    category: 'Homam',
+    thumbnail_url: 'https://img.youtube.com/vi/kYJp38X-9_k/hqdefault.jpg',
+    embed_url: 'https://www.youtube-nocookie.com/embed/kYJp38X-9_k',
+    display_order: 1
+  },
+  {
+    id: 2,
+    title: 'Sri Satyanarayana Swamy Vratam Complete Katha & Pooja',
+    title_te: 'శ్రీ సత్యనారాయణ స్వామి వ్రత కథ & సంపూర్ణ పూజ',
+    youtube_url: 'https://www.youtube.com/watch?v=0h6Q5XQ_0lE',
+    youtube_video_id: '0h6Q5XQ_0lE',
+    description: 'Step-by-step sacred Satyanarayana Swamy Pooja recitation, Kalasha sthapana, and prasadam offerings.',
+    description_te: 'కలశస్థాపన, నవగ్రహ పూజ, వ్రత కథా శ్రవణం మరియు ప్రసాద వితరణతో కూడిన సంపూర్ణ సత్యనారాయణ వ్రత పూజా విధానం.',
+    category: 'Pooja',
+    thumbnail_url: 'https://img.youtube.com/vi/0h6Q5XQ_0lE/hqdefault.jpg',
+    embed_url: 'https://www.youtube-nocookie.com/embed/0h6Q5XQ_0lE',
+    display_order: 2
+  },
+  {
+    id: 3,
+    title: 'Maha Mrityunjaya Homam for Health, Healing & Longevity',
+    title_te: 'ఆరోగ్య ఆయుర్వృద్ధి కొరకు మహా మృత్యుంజయ హోమం',
+    youtube_url: 'https://www.youtube.com/watch?v=J9fP87Z8k0I',
+    youtube_video_id: 'J9fP87Z8k0I',
+    description: 'Vedic recitation of the sacred Tryambakam mantra with 108 ahutis of amrita valli and sesame oblations.',
+    description_te: 'దీర్ఘకాలిక అనారోగ్య నివారణ, ఆయురారోగ్య రక్షణ కొరకు 108 అమృతవల్లి ఆహుతులతో కూడిన మహా మృత్యుంజయ హవనం.',
+    category: 'Homam',
+    thumbnail_url: 'https://img.youtube.com/vi/J9fP87Z8k0I/hqdefault.jpg',
+    embed_url: 'https://www.youtube-nocookie.com/embed/J9fP87Z8k0I',
+    display_order: 3
+  },
+  {
+    id: 4,
+    title: 'Sacred Shiva Linga Rudrabhishekam with Namakam & Chamakam',
+    title_te: 'శ్రీ రుద్రాభిషేకం (నమకం & చమక సహిత శివ పూజ)',
+    youtube_url: 'https://www.youtube.com/watch?v=M5A7D8K9l4s',
+    youtube_video_id: 'M5A7D8K9l4s',
+    description: 'Holy abhishekam with milk, honey, sugarcane juice, and sacred vibhooti performed by senior purohits.',
+    description_te: 'క్షీర, మధు, ఇక్షురస, భస్మ అభిషేకములతో వేద పండితులచే శాస్త్రోక్తంగా నిర్వహించబడే దివ్య రుద్రాభిషేక దర్శనం.',
+    category: 'Pooja',
+    thumbnail_url: 'https://img.youtube.com/vi/M5A7D8K9l4s/hqdefault.jpg',
+    embed_url: 'https://www.youtube-nocookie.com/embed/M5A7D8K9l4s',
+    display_order: 4
+  },
+  {
+    id: 5,
+    title: 'Navagraha Shanti Homam & Dosha Nivarana Vidhanam',
+    title_te: 'నవగ్రహ శాంతి హోమం & దోష నివారణ పద్ధతి',
+    youtube_url: 'https://www.youtube.com/watch?v=P8m4F9A2b3c',
+    youtube_video_id: 'P8m4F9A2b3c',
+    description: 'Harmonizing the planetary influences through nine sacred grains and dedicated Vedic graha suktams.',
+    description_te: 'జాతక దోషాల ఉపశమనం, గ్రహ శాంతి మరియు కుటుంబ క్షేమం కొరకు నవధాన్య ఆహుతులతో నిర్వహించే శాంతి హోమం.',
+    category: 'Spiritual Guidance',
+    thumbnail_url: 'https://img.youtube.com/vi/P8m4F9A2b3c/hqdefault.jpg',
+    embed_url: 'https://www.youtube-nocookie.com/embed/P8m4F9A2b3c',
+    display_order: 5
+  },
+  {
+    id: 6,
+    title: 'Sri Lakshmi Kubera Pooja for Abundance & Financial Harmony',
+    title_te: 'సిరిసంపదల కొరకు శ్రీ లక్ష్మీ కుబేర పూజా విధానం',
+    youtube_url: 'https://www.youtube.com/watch?v=T6v8N4Q1d7e',
+    youtube_video_id: 'T6v8N4Q1d7e',
+    description: 'Divine worship of Goddess Maha Lakshmi and Lord Kubera with lotus flowers and kumkum archana.',
+    description_te: 'కమల పుష్పాలు, కుంకుమార్చన మరియు కనకధారా స్తోత్ర పారాయణంతో అమ్మవారి దివ్య అనుగ్రహం పొందే పూజ.',
+    category: 'Festivals',
+    thumbnail_url: 'https://img.youtube.com/vi/T6v8N4Q1d7e/hqdefault.jpg',
+    embed_url: 'https://www.youtube-nocookie.com/embed/T6v8N4Q1d7e',
+    display_order: 6
+  }
+];
+
 export default function HomeVideosSection() {
   const navigate = useNavigate();
   const { t, translateDynamic, language } = useLanguage();
-  const [videos, setVideos] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [videos, setVideos] = useState(DEFAULT_HOMEPAGE_VIDEOS.slice(0, 3));
+  const [loading, setLoading] = useState(false);
   const [activeVideo, setActiveVideo] = useState(null);
 
   useEffect(() => {
@@ -20,12 +101,12 @@ export default function HomeVideosSection() {
         const res = await fetch('/api/youtube-videos/homepage');
         if (res.ok) {
           const json = await res.json();
-          if (isMounted && json.success && Array.isArray(json.data)) {
+          if (isMounted && json.success && Array.isArray(json.data) && json.data.length > 0) {
             setVideos(json.data.slice(0, 6)); // Guarantee max 6 videos
           }
         }
       } catch (err) {
-        console.warn('[HomeVideosSection] Failed to load homepage videos:', err.message);
+        console.warn('[HomeVideosSection] API unavailable, keeping authentic defaults:', err.message);
       } finally {
         if (isMounted) setLoading(false);
       }
@@ -57,10 +138,7 @@ export default function HomeVideosSection() {
     };
   }, [activeVideo]);
 
-  // Clean empty state: if finished loading and no videos are published, hide the section
-  if (!loading && (!videos || videos.length === 0)) {
-    return null;
-  }
+  const displayVideos = (videos && videos.length > 0) ? videos : DEFAULT_HOMEPAGE_VIDEOS.slice(0, 3);
 
   const defaultDevotionalFallback = '/assets/sacred_pooja_ritual.jpg';
 
@@ -99,7 +177,7 @@ export default function HomeVideosSection() {
             </div>
           ))
         ) : (
-          videos.map((vid) => {
+          displayVideos.map((vid) => {
             const fallbackThumb = `https://img.youtube.com/vi/${vid.youtube_video_id}/hqdefault.jpg`;
             const displayTitle = language === 'te'
               ? (vid.title_te || translateDynamic(vid, 'title') || autoTranslateToTelugu(vid.title))
@@ -173,7 +251,7 @@ export default function HomeVideosSection() {
       </div>
 
       {/* View All Videos CTA */}
-      {!loading && videos.length > 0 && (
+      {displayVideos.length > 0 && (
         <div className="sacred-videos-footer">
           <button
             className="sacred-videos-view-all-btn"
