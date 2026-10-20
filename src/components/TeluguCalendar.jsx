@@ -341,6 +341,178 @@ const TeluguCalendar = () => {
     setIsLoadingPanchang(false);
   }, []);
 
+  // Client-side fallback festival calculation
+  const calculateClientFallbackFestivals = useCallback((y, m) => {
+    const fests = [];
+    const daysInMonth = new Date(Date.UTC(y, m, 0)).getUTCDate();
+    
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dt = new Date(Date.UTC(y, m - 1, d, 6, 0, 0));
+      try {
+        const p = getDailyPanchang(dt, {
+          latitude: HYDERABAD_LOCATION.latitude,
+          longitude: HYDERABAD_LOCATION.longitude,
+          elevation: 505
+        }, {
+          timezone: 'Asia/Kolkata',
+          ayanamsa: 'lahiri',
+          masaSystem: 'amanta'
+        });
+
+        const dayOfWeek = new Date(Date.UTC(y, m - 1, d, 12, 0, 0)).getUTCDay();
+        const dayTe = varamNames[dayOfWeek] || '';
+        const dayEn = varamNamesEn[dayOfWeek] || '';
+        const dayNum = String(d).padStart(2, '0');
+        const monthNum = String(m).padStart(2, '0');
+        const dateStr = `${dayNum}-${monthNum}-${y}`;
+        const dateIso = `${y}-${monthNum}-${dayNum}`;
+
+        const t0 = (p.tithis && p.tithis[0]) ? p.tithis[0].index : -1;
+        const masaIdx = p.chandramasa?.amantaIndex ?? 0;
+
+        // Vratas & Observances
+        if (t0 === 10) {
+          fests.push({
+            festival_key: `ekadashi-shukla-${d}-${m}-${y}`,
+            date: dateStr, dateIso, day: dayTe, dayEnglish: dayEn,
+            title: 'శుక్ల ఏకాదశి వ్రతం',
+            titleEnglish: 'Shukla Paksha Ekadashi',
+            category: 'vrata', icon: '🪷',
+            desc: 'సర్వపాప హరణమైన శుక్ల పక్ష ఏకాదశి ఉపవాస వ్రతం మరియు శ్రీమహావిష్ణు పూజ.',
+            descEnglish: 'Auspicious Ekadashi fast dedicated to Lord Maha Vishnu for spiritual purity.'
+          });
+        } else if (t0 === 25) {
+          fests.push({
+            festival_key: `ekadashi-krishna-${d}-${m}-${y}`,
+            date: dateStr, dateIso, day: dayTe, dayEnglish: dayEn,
+            title: m === 10 ? 'ఇందిరా ఏకాదశి' : 'బహుళ ఏకాదశి వ్రతం',
+            titleEnglish: m === 10 ? 'Indira Ekadashi' : 'Krishna Paksha Ekadashi',
+            category: 'vrata', icon: '🌱',
+            desc: 'బహుళ ఏకాదశి ఉపవాస వ్రతం మరియు హరి నామస్మరణ.',
+            descEnglish: 'Krishna Paksha Ekadashi fasting and devotional chanting.'
+          });
+        } else if (t0 === 12) {
+          fests.push({
+            festival_key: `pradosham-shukla-${d}-${m}-${y}`,
+            date: dateStr, dateIso, day: dayTe, dayEnglish: dayEn,
+            title: 'శుక్ల ప్రదోష వ్రతం',
+            titleEnglish: 'Shukla Pradosha Vratam',
+            category: 'vrata', icon: '🔱',
+            desc: 'సాయంసంధ్య వేళ పరమశివునికి రుద్రాభిషేకం మరియు బిల్వార్చన.',
+            descEnglish: 'Evening twilight worship and sacred Bilva archana for Lord Shiva.'
+          });
+        } else if (t0 === 27) {
+          fests.push({
+            festival_key: `pradosham-krishna-${d}-${m}-${y}`,
+            date: dateStr, dateIso, day: dayTe, dayEnglish: dayEn,
+            title: 'కృష్ణ ప్రదోష వ్రతం',
+            titleEnglish: 'Krishna Pradosha Vratam',
+            category: 'vrata', icon: '🔱',
+            desc: 'దోష నివారణ ప్రదోష కాల రుద్రారాధన.',
+            descEnglish: 'Sacred Pradosha dusk worship of Lord Shiva.'
+          });
+        } else if (t0 === 28) {
+          fests.push({
+            festival_key: `shivaratri-${d}-${m}-${y}`,
+            date: dateStr, dateIso, day: dayTe, dayEnglish: dayEn,
+            title: 'మాస శివరాత్రి',
+            titleEnglish: 'Masik Shivaratri',
+            category: 'vrata', icon: '🕉️',
+            desc: 'శివనామ స్మరణ, లింగార్చన మరియు జాగరణ నిష్ట.',
+            descEnglish: 'Monthly vigil and holy linga abhishekam dedicated to Lord Shiva.'
+          });
+        } else if (t0 === 14) {
+          fests.push({
+            festival_key: `purnima-${d}-${m}-${y}`,
+            date: dateStr, dateIso, day: dayTe, dayEnglish: dayEn,
+            title: 'పౌర్ణమి (శ్రీ సత్యనారాయణ వ్రతం)',
+            titleEnglish: 'Purnima (Pournami Vratam)',
+            category: 'major', icon: '🌕',
+            desc: 'శ్రీ సత్యనారాయణ స్వామి దివ్య వ్రతాచరణకు పరమ పవిత్రమైన పున్నమి తిథి.',
+            descEnglish: 'Full moon day, most auspicious for Sri Satyanarayana Swamy Pooja and spiritual merit.'
+          });
+        } else if (t0 === 29) {
+          fests.push({
+            festival_key: `amavasya-${d}-${m}-${y}`,
+            date: dateStr, dateIso, day: dayTe, dayEnglish: dayEn,
+            title: m === 10 ? 'మహాలయ అమావాస్య / ఎంగిలిపూల బతుకమ్మ' : 'అమావాస్య (పితృ తర్పణ పుణ్యదినం)',
+            titleEnglish: m === 10 ? 'Mahalaya Amavasya / Engili Pula Bathukamma' : 'Amavasya (New Moon)',
+            category: 'major', icon: '🌑',
+            desc: 'పితృదేవతల ఆరాధన, దానధర్మాలు మరియు పుణ్యస్నానాలకు శ్రేష్ఠమైన దినం.',
+            descEnglish: 'Sacred new moon day for ancestral offerings, charitable donations, and peace.'
+          });
+        } else if (t0 === 18) {
+          fests.push({
+            festival_key: `sankashti-${d}-${m}-${y}`,
+            date: dateStr, dateIso, day: dayTe, dayEnglish: dayEn,
+            title: 'సంకష్టహర చతుర్థి',
+            titleEnglish: 'Sankashti Chaturthi',
+            category: 'vrata', icon: '🐘',
+            desc: 'సంకటాల నివారణకు శ్రీ వినాయక వ్రతం మరియు చంద్ర దర్శన పూజ.',
+            descEnglish: 'Lord Ganesha fasting for removing distress and evening moonrise prayers.'
+          });
+        }
+
+        // Special October / Navaratri & Dussehra check (Ashwayuja Masa = 6 in Amanta)
+        if (masaIdx === 6 || m === 10) {
+          if (t0 === 0 && d >= 10 && d <= 15) {
+            fests.push({
+              festival_key: `navaratri-begins-${d}-${m}-${y}`,
+              date: dateStr, dateIso, day: dayTe, dayEnglish: dayEn,
+              title: 'శరన్నవరాత్రులు ప్రారంభం (కలశస్థాపన)',
+              titleEnglish: 'Sharad Navaratri Begins (Kalasha Sthapana)',
+              category: 'major', icon: '🪔',
+              desc: 'ఆశ్వయుజ శుద్ధ పాడ్యమి — దేవీ నవరాత్రుల ప్రారంభం, ఘటస్థాపన.',
+              descEnglish: 'First day of Durga Navaratri with sacred Kalasha installation.'
+            });
+          } else if (t0 === 7 && d >= 15 && d <= 22) {
+            fests.push({
+              festival_key: `durga-ashtami-${d}-${m}-${y}`,
+              date: dateStr, dateIso, day: dayTe, dayEnglish: dayEn,
+              title: 'దుర్గాష్టమి (మహాష్టమి)',
+              titleEnglish: 'Durga Ashtami (Maha Ashtami)',
+              category: 'major', icon: '⚔️',
+              desc: 'మహిషాసురమర్దిని దుర్గాదేవి విశేష పూజ.',
+              descEnglish: 'Auspicious 8th day honoring Goddess Durga Mahishasuramardini.'
+            });
+          } else if (t0 === 8 && d >= 16 && d <= 23) {
+            fests.push({
+              festival_key: `maha-navami-${d}-${m}-${y}`,
+              date: dateStr, dateIso, day: dayTe, dayEnglish: dayEn,
+              title: 'మహార్నవమి / సద్దుల బతుకమ్మ / ఆయుధ పూజ',
+              titleEnglish: 'Maha Navami / Saddula Bathukamma / Ayudha Pooja',
+              category: 'major', icon: '🌸',
+              desc: 'ఆశ్వయుజ శుద్ధ నవమి — ఆయుధ పూజ, తెలంగాణ సద్దుల బతుకమ్మ సంబరాలు.',
+              descEnglish: 'Great Ninth day honoring weapons, books, and Saddula Bathukamma grand finale.'
+            });
+          } else if (t0 === 9 && d >= 17 && d <= 24) {
+            fests.push({
+              festival_key: `vijaya-dashami-${d}-${m}-${y}`,
+              date: dateStr, dateIso, day: dayTe, dayEnglish: dayEn,
+              title: 'విజయదశమి (దసరా / శమీ పూజ)',
+              titleEnglish: 'Vijaya Dashami (Dussehra / Dasara)',
+              category: 'major', icon: '🏹',
+              desc: 'చెడుపై మంచి సాధించిన విజయోత్సవం, జమ్మి చెట్టు (శమీ) పూజ, పాలపిట్ట దర్శనం.',
+              descEnglish: 'Grand victory of Dharma over evil, Shami tree worship, and auspicious beginnings.'
+            });
+          }
+        }
+      } catch {}
+    }
+    // Remove duplicate dates if any and sort chronologically
+    const seenDates = new Set();
+    const unique = [];
+    for (const f of fests) {
+      const key = `${f.dateIso}-${f.titleEnglish}`;
+      if (!seenDates.has(key)) {
+        seenDates.add(key);
+        unique.push(f);
+      }
+    }
+    unique.sort((a, b) => new Date(a.dateIso).getTime() - new Date(b.dateIso).getTime());
+    return unique;
+  }, []);
+
   // Load Monthly Festivals for navYear and navMonth
   const loadFestivals = useCallback(async (y, m) => {
     setIsLoadingFestivals(true);
@@ -348,18 +520,21 @@ const TeluguCalendar = () => {
       const res = await fetch(`/api/panchang/festivals?year=${y}&month=${m}&city=Hyderabad&lat=17.3850&lon=78.4867`);
       if (res.ok) {
         const json = await res.json();
-        if (json.success && Array.isArray(json.data)) {
+        if (json.success && Array.isArray(json.data) && json.data.length > 0) {
           setImportantDates(json.data);
           setIsLoadingFestivals(false);
           return;
         }
       }
     } catch (e) {
-      console.warn("Backend festivals API unavailable:", e);
+      console.warn("Backend festivals API unavailable, calculating fallback:", e);
     }
-    setImportantDates([]);
+    
+    // Fallback to local client computation so users always see festivals
+    const fallbackList = calculateClientFallbackFestivals(y, m);
+    setImportantDates(fallbackList);
     setIsLoadingFestivals(false);
-  }, []);
+  }, [calculateClientFallbackFestivals]);
 
   // Sync panchang whenever selectedDate changes
   useEffect(() => {

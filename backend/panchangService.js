@@ -1096,9 +1096,56 @@ function calculateAstronomicalFestivalsForMonth(year, month, customLocation = {}
   return festivals;
 }
 
+let festivalsTableChecked = false;
+
+/**
+ * Ensure festivals table exists in the connected database
+ */
+async function ensureFestivalsTable() {
+  if (festivalsTableChecked) return;
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS festivals (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        festival_key VARCHAR(100) UNIQUE NOT NULL,
+        title_en VARCHAR(255) NOT NULL,
+        title_te VARCHAR(255) NOT NULL,
+        date DATE NOT NULL,
+        year INT NOT NULL,
+        month INT NOT NULL,
+        day_te VARCHAR(50) DEFAULT '',
+        day_en VARCHAR(50) DEFAULT '',
+        category VARCHAR(50) DEFAULT 'major',
+        tradition VARCHAR(100) DEFAULT 'Telugu Amanta (Andhra & Telangana)',
+        description_en TEXT NULL,
+        description_te TEXT NULL,
+        puja_muhurat_en VARCHAR(255) NULL,
+        puja_muhurat_te VARCHAR(255) NULL,
+        icon VARCHAR(50) DEFAULT '🕉️',
+        is_active BOOLEAN DEFAULT 1,
+        is_custom BOOLEAN DEFAULT 0,
+        source VARCHAR(100) DEFAULT 'Astronomical Ephemeris (Drik Ganita)',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX idx_year_month (year, month),
+        INDEX idx_date (date)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `);
+    festivalsTableChecked = true;
+  } catch (err) {
+    console.warn('[PanchangService] ensureFestivalsTable warning:', err.message);
+  }
+}
+
+/**
+ * Retrieve verified festivals for a specific Gregorian month (1-indexed).
+ * Tries the database cache first; if empty or uninitialized, calculates astronomically.
+ */
 async function getMonthlyFestivals(year, month, customLocation = {}) {
   const y = parseInt(year, 10);
   const m = parseInt(month, 10);
+
+  await ensureFestivalsTable();
 
   try {
     const [dbRows] = await pool.query(
@@ -1108,26 +1155,36 @@ async function getMonthlyFestivals(year, month, customLocation = {}) {
 
     if (Array.isArray(dbRows) && dbRows.length > 0) {
       return dbRows.map(f => {
-        const dObj = new Date(f.date);
-        const dayNum = String(dObj.getUTCDate()).padStart(2, '0');
-        const monthNum = String(m).padStart(2, '0');
-        const dStr = `${y}-${monthNum}-${dayNum}`;
+        let dStr = '';
+        if (f.date instanceof Date) {
+          const dYear = f.date.getFullYear();
+          const dMonth = String(f.date.getMonth() + 1).padStart(2, '0');
+          const dDate = String(f.date.getDate()).padStart(2, '0');
+          dStr = `${dYear}-${dMonth}-${dDate}`;
+        } else if (typeof f.date === 'string') {
+          dStr = f.date.split('T')[0];
+        }
+        const parts = dStr ? dStr.split('-') : [y, String(m).padStart(2, '0'), '01'];
+        const dayNum = parts[2] || '01';
+        const monthNum = parts[1] || String(m).padStart(2, '0');
+        const yearNum = parts[0] || y;
+
         return {
           id: f.id,
           festival_key: f.festival_key,
-          date: `${dayNum}-${monthNum}-${y}`,
-          dateIso: dStr,
-          day: f.day_te,
-          dayEnglish: f.day_en,
-          title: f.title_te,
-          titleEnglish: f.title_en,
+          date: `${dayNum}-${monthNum}-${yearNum}`,
+          dateIso: `${yearNum}-${monthNum}-${dayNum}`,
+          day: f.day_te || '',
+          dayEnglish: f.day_en || '',
+          title: f.title_te || f.title_en,
+          titleEnglish: f.title_en || f.title_te,
           category: f.category || 'major',
           desc: f.description_te || '',
           descEnglish: f.description_en || '',
           pujaMuhurat: f.puja_muhurat_te || '',
           pujaMuhuratEnglish: f.puja_muhurat_en || '',
           icon: f.icon || '🕉️',
-          tradition: f.tradition,
+          tradition: f.tradition || 'Telugu Amanta (Andhra & Telangana)',
           source: f.source || 'Astronomical Ephemeris (Drik Ganita)',
           isCustom: Boolean(f.is_custom)
         };
@@ -1149,8 +1206,8 @@ async function getMonthlyFestivals(year, month, customLocation = {}) {
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 0, 'Astronomical Ephemeris (Drik Ganita)')`,
         [
           f.festival_key, f.title_en, f.title_te, f.date, f.year, f.month,
-          f.day_te, f.day_en, f.category, 'Telugu Amanta (Andhra & Telangana)',
-          f.description_en, f.description_te, f.icon
+          f.day_te || '', f.day_en || '', f.category || 'major', 'Telugu Amanta (Andhra & Telangana)',
+          f.description_en || '', f.description_te || '', f.icon || '🕉️'
         ]
       );
     }
@@ -1159,16 +1216,20 @@ async function getMonthlyFestivals(year, month, customLocation = {}) {
   }
 
   return calculated.map(f => {
-    const parts = f.date.split('-');
+    const parts = (f.date || '').split('-');
+    const dayNum = parts[2] || '01';
+    const monthNum = parts[1] || String(m).padStart(2, '0');
+    const yearNum = parts[0] || y;
+
     return {
       festival_key: f.festival_key,
-      date: `${parts[2]}-${parts[1]}-${parts[0]}`,
-      dateIso: f.date,
-      day: f.day_te,
-      dayEnglish: f.day_en,
+      date: `${dayNum}-${monthNum}-${yearNum}`,
+      dateIso: `${yearNum}-${monthNum}-${dayNum}`,
+      day: f.day_te || '',
+      dayEnglish: f.day_en || '',
       title: f.title_te,
       titleEnglish: f.title_en,
-      category: f.category,
+      category: f.category || 'major',
       desc: f.description_te || '',
       descEnglish: f.description_en || '',
       icon: f.icon || '🕉️',
@@ -1183,6 +1244,7 @@ async function getMonthlyFestivals(year, month, customLocation = {}) {
  */
 async function recalculateYearlyFestivals(year) {
   const y = parseInt(year, 10);
+  await ensureFestivalsTable();
   let totalAdded = 0;
 
   for (let m = 1; m <= 12; m++) {
@@ -1205,8 +1267,8 @@ async function recalculateYearlyFestivals(year) {
            icon = VALUES(icon)`,
           [
             f.festival_key, f.title_en, f.title_te, f.date, f.year, f.month,
-            f.day_te, f.day_en, f.category, 'Telugu Amanta (Andhra & Telangana)',
-            f.description_en, f.description_te, f.icon
+            f.day_te || '', f.day_en || '', f.category || 'major', 'Telugu Amanta (Andhra & Telangana)',
+            f.description_en || '', f.description_te || '', f.icon || '🕉️'
           ]
         );
         totalAdded++;
@@ -1224,5 +1286,6 @@ module.exports = {
   getMonthlyFestivals,
   calculateAstronomicalFestivalsForMonth,
   recalculateYearlyFestivals,
+  ensureFestivalsTable,
   DEFAULT_LOCATION
 };
