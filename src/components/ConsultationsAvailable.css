@@ -1,15 +1,17 @@
 .consultations-section {
-  padding: 80px 20px;
+  padding: 60px 0;
   font-family: 'Poppins', sans-serif;
+  width: 100%;
 }
 
 .consultations-container {
-  padding: 80px 5%;
+  padding: 0;
+  width: 100%;
 }
 
 .consultations-header {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .lotus-icon {
@@ -29,7 +31,7 @@
 
 .consultations-title {
   font-family: 'Cinzel', serif;
-  font-size: 42px;
+  font-size: clamp(26px, 4.5vw, 42px);
   color: #2A1C15;
   margin: 0 0 10px 0;
   font-weight: 700;
@@ -40,17 +42,18 @@
 }
 
 .consultations-subtitle {
-  font-size: 16px;
+  font-size: clamp(13px, 2vw, 16px);
   color: #666;
   margin: 0;
 }
 
 .consultations-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 20px;
   max-width: 1280px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .consultation-card {
@@ -266,7 +269,17 @@
 }
 
 @media (max-width: 768px) {
-  .consultations-title {
-    font-size: 32px;
+  .consultation-card {
+    padding: 24px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .consultations-grid {
+    grid-template-columns: 1fr;
+  }
+  .lotus-icon::before, .lotus-icon::after {
+    width: 30px;
+    margin: 0 8px;
   }
 }

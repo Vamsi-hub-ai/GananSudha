@@ -1,0 +1,477 @@
+/* ============================================================
+   GNANA SUDHA DEVOTIONAL WELCOME BLESSING POPUP
+   Warm cream (#FFF8F0), Sacred Vermilion (#D92F18), Gold (#D4AF37)
+   ============================================================ */
+
+.devotional-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: rgba(26, 16, 11, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  animation: devotionalOverlayIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.devotional-popup-overlay.closing {
+  animation: devotionalOverlayOut 0.35s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+/* Modal Container */
+.devotional-popup-card {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  background: #FFF8F0;
+  border-radius: 26px;
+  border: 1.5px solid rgba(212, 175, 55, 0.55);
+  box-shadow: 0 25px 60px rgba(42, 28, 21, 0.4), 0 0 50px rgba(212, 175, 55, 0.2);
+  display: grid;
+  grid-template-columns: 46% 54%;
+  overflow: hidden;
+  transform: scale(0.96);
+  opacity: 0;
+  animation: devotionalModalIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.devotional-popup-card.closing {
+  animation: devotionalModalOut 0.35s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+/* Subtle Sacred Background Glow & Mandala for Card */
+.devotional-popup-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 85% 15%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
+    radial-gradient(circle at 90% 85%, rgba(224, 78, 21, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Floating Flower Petals */
+.devotional-petals-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.devotional-petal {
+  position: absolute;
+  background: radial-gradient(circle at 35% 35%, #FFD1DC 0%, #FF8DA1 60%, #E95221 100%);
+  border-radius: 50% 0 50% 50%;
+  opacity: 0.65;
+  filter: drop-shadow(0 2px 4px rgba(224, 78, 21, 0.25));
+  animation: petalFall linear infinite;
+}
+
+.devotional-petal.p1 {
+  width: 14px;
+  height: 18px;
+  top: -20px;
+  left: 20%;
+  animation-duration: 4.5s;
+  animation-delay: 0.2s;
+}
+
+.devotional-petal.p2 {
+  width: 12px;
+  height: 16px;
+  top: -20px;
+  left: 55%;
+  animation-duration: 5s;
+  animation-delay: 0.8s;
+}
+
+.devotional-petal.p3 {
+  width: 15px;
+  height: 20px;
+  top: -20px;
+  left: 78%;
+  animation-duration: 4.8s;
+  animation-delay: 0.4s;
+}
+
+.devotional-petal.p4 {
+  width: 10px;
+  height: 14px;
+  top: -20px;
+  left: 38%;
+  animation-duration: 5.5s;
+  animation-delay: 1.2s;
+}
+
+.devotional-petal.p5 {
+  width: 13px;
+  height: 17px;
+  top: -20px;
+  left: 90%;
+  animation-duration: 4.2s;
+  animation-delay: 1.5s;
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.75;
+  }
+  85% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(600px) rotate(380deg) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Close Button */
+.devotional-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #34251F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(42, 28, 21, 0.12);
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.devotional-close-btn:hover {
+  background: #FFF8F0;
+  border-color: #D92F18;
+  color: #D92F18;
+  transform: scale(1.08) rotate(90deg);
+  box-shadow: 0 6px 16px rgba(217, 47, 24, 0.2);
+}
+
+/* Left Column: Lord Ganesha Image */
+.devotional-image-col {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  background: #FFF8F0;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.devotional-ganesha-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Right Column: Telugu Devotional Blessing */
+.devotional-content-col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 36px;
+  z-index: 2;
+}
+
+/* Golden Lotus Flourish Dividers */
+.devotional-flourish {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 14px;
+  margin: 8px 0;
+}
+
+.devotional-flourish .flourish-line {
+  flex: 1;
+  max-width: 90px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, #D4AF37 40%, #D4AF37 70%, transparent);
+  position: relative;
+}
+
+.devotional-flourish .flourish-line-left::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background: #D4AF37;
+}
+
+.devotional-flourish .flourish-line-right::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background: #D4AF37;
+}
+
+.devotional-flourish .flourish-icon {
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(0 1px 3px rgba(212, 175, 55, 0.4));
+  flex-shrink: 0;
+}
+
+/* Telugu Blessing Typography */
+.devotional-blessing-text {
+  font-family: 'Noto Sans Telugu', 'Noto Serif Telugu', sans-serif;
+  margin: 22px 0;
+  line-height: 1.85;
+  color: #34251F;
+  letter-spacing: 0.2px;
+}
+
+.blessing-line-primary {
+  font-size: 21px;
+  font-weight: 700;
+  color: #D92F18;
+  display: block;
+  margin-bottom: 6px;
+  filter: drop-shadow(0 1px 1px rgba(217, 47, 24, 0.15));
+}
+
+.blessing-line-secondary {
+  font-size: 19px;
+  font-weight: 700;
+  color: #C53018;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.blessing-line-body {
+  font-size: 18px;
+  font-weight: 600;
+  color: #34251F;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.blessing-line-accent {
+  font-size: 18px;
+  font-weight: 600;
+  color: #34251F;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.text-divine-orange {
+  color: #F45B25;
+  font-weight: 700;
+}
+
+.blessing-line-close {
+  font-size: 18px;
+  font-weight: 600;
+  color: #34251F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Confirmation Pill Button */
+.devotional-confirm-btn {
+  margin-top: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #E04E15 0%, #C53018 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  padding: 13px 40px;
+  font-family: 'Noto Sans Telugu', 'Noto Serif Telugu', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(217, 47, 24, 0.38), 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.5px;
+}
+
+.devotional-confirm-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(217, 47, 24, 0.48), 0 0 18px rgba(212, 175, 55, 0.35);
+  background: linear-gradient(135deg, #F45B25 0%, #D92F18 100%);
+}
+
+.devotional-confirm-btn:active {
+  transform: translateY(1px);
+}
+
+.devotional-confirm-btn .confirm-arrow {
+  transition: transform 0.25s ease;
+}
+
+.devotional-confirm-btn:hover .confirm-arrow {
+  transform: translateX(4px);
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes devotionalOverlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes devotionalOverlayOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes devotionalModalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes devotionalModalOut {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(12px);
+  }
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   ============================================================ */
+@media (max-width: 900px) {
+  .devotional-popup-card {
+    max-width: 720px;
+    grid-template-columns: 44% 56%;
+  }
+
+  .devotional-content-col {
+    padding: 32px 24px;
+  }
+
+  .blessing-line-primary {
+    font-size: 19px;
+  }
+
+  .blessing-line-secondary {
+    font-size: 17px;
+  }
+
+  .blessing-line-body,
+  .blessing-line-accent,
+  .blessing-line-close {
+    font-size: 16px;
+  }
+
+  .devotional-confirm-btn {
+    padding: 11px 32px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 680px) {
+  .devotional-popup-overlay {
+    padding: 14px;
+  }
+
+  .devotional-popup-card {
+    grid-template-columns: 1fr;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 20px;
+  }
+
+  .devotional-image-col {
+    min-height: 200px;
+    max-height: 220px;
+  }
+
+  .devotional-content-col {
+    padding: 24px 18px 28px 18px;
+  }
+
+  .blessing-line-primary {
+    font-size: 17px;
+  }
+
+  .blessing-line-secondary {
+    font-size: 15px;
+  }
+
+  .blessing-line-body,
+  .blessing-line-accent,
+  .blessing-line-close {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .devotional-confirm-btn {
+    width: 100%;
+    padding: 12px 24px;
+    font-size: 15px;
+  }
+
+  .devotional-close-btn {
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .devotional-popup-overlay,
+  .devotional-popup-card,
+  .devotional-petal {
+    animation: none !important;
+    transition: opacity 0.15s ease !important;
+  }
+}

@@ -1,0 +1,332 @@
+/* -------------------------------------------------------------
+   Gnana Sudha — Videos Page Styling
+   ------------------------------------------------------------- */
+
+.videos-page-container {
+  min-height: 80vh;
+  background: #FFFDF9;
+  padding-bottom: 80px;
+}
+
+/* Hero Banner */
+.videos-hero {
+  background: linear-gradient(180deg, #FFF5ED 0%, #FFFDF9 100%);
+  padding: 40px 20px 30px 20px;
+  border-bottom: 1px solid #FED7AA;
+  position: relative;
+}
+
+.videos-hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.videos-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  color: #64748B;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+.videos-back-btn:hover {
+  color: #C53018;
+  border-color: #FED7AA;
+  transform: translateX(-3px);
+}
+
+.videos-hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFF7ED;
+  border: 1px solid #FED7AA;
+  color: #C2410C;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.videos-hero-title {
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
+  font-size: 36px;
+  font-weight: 700;
+  color: #2A1C15;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+}
+
+.videos-hero-subtitle {
+  font-size: 16px;
+  color: #64748B;
+  max-width: 650px;
+  margin: 0 auto 18px auto;
+  line-height: 1.6;
+}
+
+.videos-hero-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.videos-hero-divider img {
+  height: 26px;
+  opacity: 0.85;
+}
+
+/* Toolbar & Filters */
+.videos-toolbar-wrapper {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 24px 20px 0 20px;
+}
+
+.videos-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #FFFFFF;
+  padding: 16px 20px;
+  border-radius: 16px;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+}
+
+.videos-category-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.videos-chip {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid #E2E8F0;
+  background: #F8FAFC;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.videos-chip:hover {
+  background: #FFF7ED;
+  color: #C2410C;
+  border-color: #FED7AA;
+}
+
+.videos-chip.active {
+  background: #C53018;
+  color: #FFFFFF;
+  border-color: #C53018;
+  box-shadow: 0 4px 12px rgba(197, 48, 24, 0.25);
+}
+
+.videos-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 260px;
+  flex: 1;
+  max-width: 360px;
+}
+
+.videos-search-icon {
+  position: absolute;
+  left: 12px;
+  color: #94A3B8;
+  pointer-events: none;
+}
+
+.videos-search-input {
+  width: 100%;
+  padding: 9px 36px 9px 38px;
+  border-radius: 25px;
+  border: 1px solid #E2E8F0;
+  background: #F8FAFC;
+  font-size: 13px;
+  color: #1E293B;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.videos-search-input:focus {
+  background: #FFFFFF;
+  border-color: #C53018;
+  box-shadow: 0 0 0 3px rgba(197, 48, 24, 0.12);
+}
+
+.videos-search-clear {
+  position: absolute;
+  right: 12px;
+  background: #CBD5E1;
+  border: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.videos-search-clear:hover {
+  background: #94A3B8;
+}
+
+/* Main Grid Content */
+.videos-main-content {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 24px 20px 0 20px;
+}
+
+.videos-count-bar {
+  font-size: 13px;
+  color: #64748B;
+  margin-bottom: 20px;
+}
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* Empty State */
+.videos-empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 1px dashed #CBD5E1;
+  margin-top: 20px;
+}
+
+.videos-empty-state .empty-icon {
+  color: #CBD5E1;
+  margin-bottom: 16px;
+}
+
+.videos-empty-state h3 {
+  font-size: 18px;
+  color: #1E293B;
+  margin: 0 0 8px 0;
+}
+
+.videos-empty-state p {
+  font-size: 14px;
+  color: #64748B;
+  margin: 0 0 20px 0;
+}
+
+.videos-reset-filter-btn {
+  background: #C53018;
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.videos-reset-filter-btn:hover {
+  background: #E04E15;
+}
+
+/* Load More */
+.videos-load-more-wrap {
+  text-align: center;
+  margin-top: 48px;
+}
+
+.videos-load-more-btn {
+  background: #FFFFFF;
+  border: 1px solid #FED7AA;
+  color: #C2410C;
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(197, 48, 24, 0.08);
+  transition: all 0.2s ease;
+}
+
+.videos-load-more-btn:hover:not(:disabled) {
+  background: #FFF7ED;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(197, 48, 24, 0.16);
+}
+
+.videos-load-more-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.videos-load-more-btn .spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .videos-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  .videos-hero-title {
+    font-size: 30px;
+  }
+  .videos-search-box {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .videos-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .videos-hero {
+    padding: 30px 16px 20px 16px;
+  }
+  .videos-hero-title {
+    font-size: 24px;
+  }
+  .videos-toolbar {
+    padding: 14px;
+  }
+}

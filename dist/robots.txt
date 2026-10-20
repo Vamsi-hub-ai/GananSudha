@@ -1,0 +1,13 @@
+# Robots.txt for Gnana Sudha (https://gnanasudha.com)
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /admin/*
+Disallow: /checkout
+Disallow: /cart
+
+# Host
+Host: https://gnanasudha.com
+
+# Sitemaps
+Sitemap: https://gnanasudha.com/sitemap.xml

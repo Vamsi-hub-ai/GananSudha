@@ -1,0 +1,419 @@
+/* -------------------------------------------------------------
+   Gnana Sudha — Sacred YouTube Videos Section
+   Desktop: 3 columns, Tablet: 2 columns, Mobile: 1 column
+   ------------------------------------------------------------- */
+
+.sacred-videos-section {
+  width: 100%;
+  max-width: 1240px;
+  margin: 70px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.sacred-videos-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.sacred-videos-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFF7ED;
+  border: 1px solid #FFEDD5;
+  color: #C2410C;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.sacred-videos-title {
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
+  font-size: 32px;
+  font-weight: 700;
+  color: #2A1C15;
+  margin: 0 0 10px 0;
+  line-height: 1.25;
+}
+
+.sacred-videos-subtitle {
+  font-size: 15px;
+  color: #64748B;
+  max-width: 680px;
+  margin: 0 auto 18px auto;
+  line-height: 1.6;
+}
+
+.sacred-videos-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.sacred-videos-divider img {
+  height: 24px;
+  opacity: 0.85;
+}
+
+/* 3 columns on desktop, 2 on tablet, 1 on mobile */
+.sacred-videos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 10px;
+}
+
+/* Video Card */
+.sacred-video-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid #F1F5F9;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  position: relative;
+}
+
+.sacred-video-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(197, 48, 24, 0.12);
+  border-color: #FED7AA;
+}
+
+/* Thumbnail 16:9 container */
+.sacred-video-thumb-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  background: #1E293B;
+  overflow: hidden;
+}
+
+.sacred-video-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.sacred-video-card:hover .sacred-video-thumb {
+  transform: scale(1.05);
+}
+
+.sacred-video-thumb-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.55) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.sacred-video-card:hover .sacred-video-thumb-overlay {
+  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(197, 48, 24, 0.45) 100%);
+}
+
+/* Play Button */
+.sacred-video-play-btn {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #C53018;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(197, 48, 24, 0.5), 0 0 0 0 rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.sacred-video-card:hover .sacred-video-play-btn {
+  transform: scale(1.14);
+  background: #E04E15;
+  box-shadow: 0 6px 24px rgba(224, 78, 21, 0.7), 0 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.sacred-video-play-btn svg {
+  margin-left: 3px; /* visual center for play triangle */
+}
+
+/* Category Badge */
+.sacred-video-category-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(42, 28, 21, 0.85);
+  backdrop-filter: blur(6px);
+  color: #FED7AA;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  z-index: 3;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+/* Card Body */
+.sacred-video-body {
+  padding: 18px 18px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.sacred-video-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1E293B;
+  line-height: 1.4;
+  margin: 0 0 8px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.2s ease;
+}
+
+.sacred-video-card:hover .sacred-video-card-title {
+  color: #C53018;
+}
+
+.sacred-video-card-desc {
+  font-size: 13px;
+  color: #64748B;
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Card Footer with Watch Now CTA */
+.sacred-video-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #C53018;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.sacred-video-card-cta svg {
+  transition: transform 0.2s ease;
+}
+
+.sacred-video-card:hover .sacred-video-card-cta svg {
+  transform: translateX(4px);
+}
+
+/* View All CTA button */
+.sacred-videos-footer {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.sacred-videos-view-all-btn {
+  background: linear-gradient(135deg, #E04E15 0%, #C53018 100%);
+  color: #FFFFFF;
+  border: none;
+  padding: 13px 32px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 20px rgba(197, 48, 24, 0.24);
+  transition: all 0.25s ease;
+}
+
+.sacred-videos-view-all-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(197, 48, 24, 0.35);
+  background: linear-gradient(135deg, #EA580C 0%, #B91C1C 100%);
+}
+
+/* Modal Player */
+.sacred-video-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 20px;
+  animation: sacredFadeIn 0.25s ease;
+}
+
+.sacred-video-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  background: #000000;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  animation: sacredSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sacred-video-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.sacred-video-modal-close:hover {
+  background: #C53018;
+  transform: scale(1.1);
+}
+
+.sacred-video-iframe-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.sacred-video-iframe-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.sacred-video-modal-meta {
+  padding: 16px 20px;
+  background: #0F172A;
+  color: #FFFFFF;
+}
+
+.sacred-video-modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+}
+
+.sacred-video-modal-desc {
+  font-size: 13px;
+  color: #94A3B8;
+  margin: 0;
+  line-height: 1.5;
+}
+
+@keyframes sacredFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes sacredSlideUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Skeletons */
+.sacred-video-card.skeleton {
+  pointer-events: none;
+}
+
+.skeleton-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s infinite;
+}
+
+.skeleton-text {
+  height: 16px;
+  border-radius: 4px;
+  background: #E2E8F0;
+  margin-bottom: 8px;
+}
+
+.skeleton-text.short {
+  width: 60%;
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 992px) {
+  .sacred-videos-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  .sacred-videos-title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sacred-videos-section {
+    margin: 50px auto;
+    padding: 0 16px;
+  }
+  .sacred-videos-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .sacred-videos-title {
+    font-size: 24px;
+  }
+  .sacred-videos-subtitle {
+    font-size: 14px;
+  }
+  .sacred-video-body {
+    padding: 14px;
+  }
+  .sacred-video-card-title {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,653 @@
+/* ==========================================================================
+   PANDIT COORDINATION BOOKING UI — Compact Modern Authentic Layout
+   ========================================================================== */
+
+.pandit-coordination-section {
+  padding: 30px 0 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Outer Unified Container - Compact max-width */
+.pandit-booking-card-wrapper {
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  background: linear-gradient(135deg, #FFFDFB 0%, #FAF3EB 100%);
+  border-radius: 22px;
+  border: 1px solid rgba(224, 78, 21, 0.14);
+  box-shadow: 
+    0 16px 45px rgba(43, 29, 20, 0.06),
+    0 3px 12px rgba(224, 78, 21, 0.03);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   LEFT DEVOTIONAL COLUMN (~40%)
+   ========================================================================== */
+.pandit-booking-left-col {
+  flex: 0 0 38%;
+  padding: 24px 18px 16px 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  overflow: hidden;
+}
+
+/* Hanging Bells & Diyas Top-Left Ornament - Sleek Corner Placement */
+.pandit-hanging-diyas {
+  position: absolute;
+  top: 0;
+  left: 6px;
+  width: 42px;
+  height: 72px;
+  pointer-events: none;
+  z-index: 2;
+  filter: drop-shadow(0 2px 4px rgba(217, 119, 6, 0.25));
+}
+
+/* Subtle Top-Right Mandala Watermark */
+.pandit-mandala-watermark {
+  position: absolute;
+  top: -30px;
+  right: -40px;
+  width: 240px;
+  height: 240px;
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: 0;
+  animation: slowRotatePanditMandala 140s linear infinite;
+}
+
+@keyframes slowRotatePanditMandala {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Left Content Stack - Clear of the Corner Hanging Diyas */
+.pandit-left-stack {
+  position: relative;
+  z-index: 1;
+  padding-left: 44px;
+}
+
+/* Top Pill Eyebrow Tag: 🪷 EXPERIENCED • VERIFIED • TRUSTED 🪷 */
+.pandit-eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FFF2E9;
+  border: 1px solid #FED7C3;
+  border-radius: 50px;
+  padding: 4px 10px;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #B45309;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 4px rgba(224, 78, 21, 0.06);
+}
+
+.pandit-eyebrow-pill svg {
+  color: #E04E15;
+}
+
+/* Typography */
+.pandit-brand-title {
+  margin: 0 0 6px;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.pandit-title-line1 {
+  font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #241812;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.pandit-title-line2 {
+  font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+  font-size: 30px;
+  font-weight: 800;
+  color: #E04E15;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #E04E15 0%, #C53018 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.pandit-title-line3 {
+  font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+  font-size: 30px;
+  font-weight: 800;
+  color: #E04E15;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #E04E15 0%, #C53018 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Description paragraph */
+.pandit-left-description {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #55443B;
+  margin: 6px 0 14px;
+  max-width: 330px;
+}
+
+/* 4 Feature Badges in 2x2 Grid */
+.pandit-badges-2x2-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.pandit-badge-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(224, 78, 21, 0.12);
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(43, 29, 20, 0.03);
+  transition: all 0.2s ease;
+}
+
+.pandit-badge-card:hover {
+  transform: translateY(-1.5px);
+  border-color: rgba(224, 78, 21, 0.3);
+  box-shadow: 0 4px 12px rgba(224, 78, 21, 0.08);
+}
+
+.pandit-badge-icon-wrap {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: #FFF5EE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #E04E15;
+  flex-shrink: 0;
+}
+
+.pandit-badge-text-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.pandit-badge-heading {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: #241812;
+  line-height: 1.2;
+}
+
+.pandit-badge-sub {
+  font-size: 9.5px;
+  color: #6B7280;
+  line-height: 1.25;
+  margin-top: 1px;
+}
+
+/* Bottom Devotional Still Life Image - Expands to Fill Bottom Naturally with Beautiful Framing */
+.pandit-bottom-image-wrap {
+  margin-top: 14px;
+  flex: 1;
+  display: flex;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  min-height: 200px;
+}
+
+.pandit-devotional-img {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(43, 29, 20, 0.08);
+  border: 1px solid rgba(224, 78, 21, 0.16);
+  display: block;
+}
+
+/* ==========================================================================
+   RIGHT COMPREHENSIVE BOOKING CARD (~60%)
+   ========================================================================== */
+.pandit-booking-right-col {
+  flex: 1;
+  padding: 16px 16px 16px 0;
+  display: flex;
+}
+
+.pandit-form-inner-card {
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 18px;
+  border: 1px solid rgba(224, 78, 21, 0.12);
+  box-shadow: 
+    0 12px 30px rgba(43, 29, 20, 0.04),
+    0 2px 6px rgba(0, 0, 0, 0.02);
+  padding: 22px 26px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card Header */
+.pandit-card-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.pandit-card-header-lotus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.pandit-card-header-lotus .header-line {
+  height: 1px;
+  width: 40px;
+  background: linear-gradient(90deg, transparent 0%, #E04E15 100%);
+}
+
+.pandit-card-header-lotus .header-line.right {
+  background: linear-gradient(270deg, transparent 0%, #E04E15 100%);
+}
+
+.pandit-card-header-lotus svg {
+  color: #E04E15;
+  width: 18px;
+  height: 15px;
+}
+
+.pandit-card-title {
+  font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+  font-size: 21px;
+  font-weight: 700;
+  color: #241812;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin: 0 0 3px;
+}
+
+.pandit-card-subtitle {
+  font-size: 12px;
+  color: #6B7280;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Form Grid */
+.pandit-fields-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+/* Two-column layout */
+.pandit-row-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* Single Field Container */
+.pandit-input-field {
+  display: flex;
+  align-items: stretch;
+  gap: 9px;
+  position: relative;
+}
+
+/* Icon Box on Left */
+.pandit-field-icon-box {
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  background: #FFF5EE;
+  border: 1px solid #FED7C3;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #E04E15;
+  margin-top: 17px;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.pandit-input-field:focus-within .pandit-field-icon-box {
+  border-color: #E04E15;
+  background: #FEECE1;
+  box-shadow: 0 0 0 2px rgba(224, 78, 21, 0.1);
+}
+
+/* Control Block */
+.pandit-control-block {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.pandit-field-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #261911;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.pandit-field-required {
+  color: #DC2626;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* Controls */
+.pandit-form-input,
+.pandit-form-select,
+.pandit-form-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 7px 11px;
+  font-size: 12.5px;
+  color: #1F2937;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.pandit-form-input:focus,
+.pandit-form-select:focus,
+.pandit-form-textarea:focus {
+  border-color: #E04E15;
+  box-shadow: 0 0 0 2.5px rgba(224, 78, 21, 0.1);
+  background: #FFFFFF;
+}
+
+.pandit-form-input::placeholder,
+.pandit-form-textarea::placeholder {
+  color: #9CA3AF;
+  font-size: 12.5px;
+}
+
+.pandit-select-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.pandit-form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 30px;
+  cursor: pointer;
+  background-color: #FFFFFF;
+}
+
+.pandit-select-chevron {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #6B7280;
+}
+
+/* Phone combined input */
+.pandit-phone-combined {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  background: #FFFFFF;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.pandit-phone-combined:focus-within {
+  border-color: #E04E15;
+  box-shadow: 0 0 0 2.5px rgba(224, 78, 21, 0.1);
+}
+
+.pandit-country-code {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: #F9FAFB;
+  border-right: 1px solid #E5E7EB;
+  padding: 7px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  cursor: default;
+  user-select: none;
+}
+
+.pandit-phone-input {
+  flex: 1;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 7px 11px;
+  outline: none;
+  font-size: 12.5px;
+  color: #1F2937;
+}
+
+/* Textarea wrapper & character counter */
+.pandit-textarea-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.pandit-form-textarea {
+  resize: vertical;
+  min-height: 42px;
+  padding: 6px 10px 17px;
+}
+
+.pandit-char-counter {
+  position: absolute;
+  right: 8px;
+  bottom: 3px;
+  font-size: 9.5px;
+  color: #9CA3AF;
+  pointer-events: none;
+  font-weight: 500;
+}
+
+/* Submit Action Button */
+.pandit-submit-btn {
+  margin-top: 6px;
+  width: 100%;
+  background: linear-gradient(135deg, #E04E15 0%, #C53018 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 6px 18px rgba(224, 78, 21, 0.28);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pandit-submit-btn:hover:not(:disabled) {
+  transform: translateY(-1.5px);
+  box-shadow: 0 8px 22px rgba(224, 78, 21, 0.35);
+  background: linear-gradient(135deg, #EB561D 0%, #D1341B 100%);
+}
+
+.pandit-submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.pandit-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Security footnote */
+.pandit-security-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #6B7280;
+  text-align: center;
+}
+
+.pandit-security-note svg {
+  color: #4B5563;
+  flex-shrink: 0;
+}
+
+/* Alert Notification Banner */
+.pandit-booking-alert {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.pandit-booking-alert.error {
+  background: #FEF2F2;
+  border: 1px solid #FCA5A5;
+  color: #B91C1C;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .pandit-booking-card-wrapper {
+    flex-direction: column;
+    border-radius: 20px;
+    margin: 0 16px;
+  }
+
+  .pandit-booking-left-col {
+    flex: none;
+    width: 100%;
+    padding: 24px 20px 0;
+    box-sizing: border-box;
+  }
+
+  .pandit-booking-right-col {
+    padding: 0 16px 20px;
+  }
+
+  .pandit-bottom-image-wrap {
+    padding-right: 0;
+  }
+
+  .pandit-devotional-img {
+    height: 160px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(224, 78, 21, 0.16);
+  }
+}
+
+@media (max-width: 640px) {
+  .pandit-coordination-section {
+    padding: 24px 0 40px;
+  }
+
+  .pandit-booking-card-wrapper {
+    margin: 0 8px;
+    border-radius: 16px;
+  }
+
+  .pandit-booking-left-col {
+    padding: 20px 14px 0;
+  }
+
+  .pandit-left-stack {
+    padding-left: 0;
+  }
+
+  .pandit-hanging-diyas {
+    display: none;
+  }
+
+  .pandit-title-line1 {
+    font-size: 22px;
+  }
+
+  .pandit-title-line2,
+  .pandit-title-line3 {
+    font-size: 26px;
+  }
+
+  .pandit-badges-2x2-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .pandit-form-inner-card {
+    padding: 18px 14px 16px;
+    border-radius: 16px;
+  }
+
+  .pandit-card-title {
+    font-size: 18px;
+  }
+
+  .pandit-row-2col {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .pandit-field-icon-box {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    margin-top: 16px;
+  }
+
+  .pandit-devotional-img {
+    height: 140px;
+  }
+}

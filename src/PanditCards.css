@@ -1,9 +1,23 @@
-/* Pandit Cards v2 Redesign */
+/* Pandit Cards v2 Redesign - 3 Profiles Per Row */
 .pandits-directory-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
   width: 100%;
+}
+
+@media (max-width: 1100px) {
+  .pandits-directory-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 680px) {
+  .pandits-directory-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
 
 .pandit-card-v2 {
@@ -59,9 +73,9 @@
 }
 
 .pandit-card-avatar {
-  width: 160px;
-  height: 160px;
-  margin: 16px auto 20px;
+  width: 140px;
+  height: 140px;
+  margin: 16px auto 18px;
   border-radius: 50%;
   overflow: hidden;
   border: 4px solid #fff;
@@ -76,16 +90,21 @@
 
 .pandit-card-name {
   font-family: var(--font-heading, 'Cinzel', serif);
-  font-size: 18px;
+  font-size: 17px;
   color: #2B1D14;
   margin: 0 0 4px 0;
+  font-weight: 700;
 }
 
 .pandit-card-spec {
   font-size: 12px;
   color: #E04E15;
   font-weight: 600;
-  margin: 0 0 16px 0;
+  margin: 0 0 14px 0;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pandit-card-desc {
@@ -162,12 +181,252 @@
 
 .pandit-card-actions {
   display: flex;
-  gap: 12px;
+  width: 100%;
+  margin-top: auto;
 }
 
-.btn-outline-action:hover {
-  background: #f9f9f9 !important;
-  border-color: #ccc !important;
+.btn-view-pandit-profile {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: #FFF5F2;
+  border: 1.5px solid #F5C7BC;
+  color: #C53018;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgba(197, 48, 24, 0.05);
+}
+
+.btn-view-pandit-profile:hover {
+  background: linear-gradient(135deg, #C53018 0%, #E04E15 100%);
+  color: #FFFFFF;
+  border-color: #C53018;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(197, 48, 24, 0.25);
+}
+
+/* Pandit Profile Details Modal */
+.pandit-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(43, 29, 20, 0.65);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 20px;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.pandit-modal-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 50px -12px rgba(43, 29, 20, 0.28);
+  position: relative;
+  border: 1px solid #F3EAE3;
+  animation: modalScaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalScaleUp {
+  from { transform: scale(0.96); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.pandit-modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #FAF6F3;
+  border: 1px solid #EBE4DE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5C4D44;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.pandit-modal-close-btn:hover {
+  background: #C53018;
+  color: #FFFFFF;
+  border-color: #C53018;
+}
+
+.pandit-modal-header {
+  padding: 32px 28px 20px;
+  text-align: center;
+  background: linear-gradient(180deg, #FFF7F2 0%, #FFFFFF 100%);
+  border-bottom: 1px solid #F3EAE3;
+}
+
+.pandit-modal-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  margin: 0 auto 14px;
+  overflow: hidden;
+  border: 4px solid #FFFFFF;
+  box-shadow: 0 8px 20px rgba(197, 48, 24, 0.15);
+}
+
+.pandit-modal-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pandit-modal-body {
+  padding: 24px 28px 32px;
+}
+
+.pandit-modal-name {
+  font-family: var(--font-heading, 'Cinzel', serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: #2B1D14;
+  margin: 0 0 6px 0;
+}
+
+.pandit-modal-spec {
+  color: #C53018;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+}
+
+.pandit-modal-pills {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.pandit-modal-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #8C7A6B;
+  margin: 20px 0 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pandit-modal-bio {
+  font-size: 14px;
+  color: #554438;
+  line-height: 1.6;
+  background: #FAF7F4;
+  border-left: 3px solid #C53018;
+  padding: 12px 16px;
+  border-radius: 0 10px 10px 0;
+  margin: 0 0 16px 0;
+}
+
+.pandit-modal-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+
+@media (max-width: 500px) {
+  .pandit-modal-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pandit-modal-info-box {
+  background: #FFFFFF;
+  border: 1px solid #EFE8E2;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.pandit-modal-info-box .icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #FFF5F2;
+  color: #C53018;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pandit-modal-info-box .info-label {
+  font-size: 11px;
+  color: #8C7A6B;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.pandit-modal-info-box .info-val {
+  font-size: 13px;
+  color: #2B1D14;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.pandit-modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.pandit-modal-tag {
+  background: #FFF7F2;
+  color: #C53018;
+  border: 1px solid #F5D3C8;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pandit-modal-footer-note {
+  margin-top: 24px;
+  padding: 14px 16px;
+  background: #FFFBF7;
+  border: 1px dashed #E2CEBE;
+  border-radius: 12px;
+  font-size: 13px;
+  color: #66503F;
+  text-align: center;
+  line-height: 1.5;
 }
 
 /* Trust Badges Banner */

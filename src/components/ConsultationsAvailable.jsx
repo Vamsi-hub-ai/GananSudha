@@ -1,20 +1,22 @@
 import React, { useState, useContext } from 'react';
-import { CalendarClock, Home, MoonStar, Flame, MessageCircle, Calendar, CheckCircle2 } from 'lucide-react';
+import { CalendarClock, Home, MoonStar, Flame, Calendar, CheckCircle2 } from 'lucide-react';
 import BookingModal from './BookingModal';
 import { DataContext } from '../context/DataContext';
+import { useLanguage } from '../context/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import './ConsultationsAvailable.css';
 
 const ConsultationsAvailable = () => {
   const [selectedService, setSelectedService] = useState(null);
   const { currentCustomer, consultations } = useContext(DataContext);
+  const { t, language } = useLanguage();
   const navigate = useNavigate();
 
   const handleBookClick = (card) => {
     if (currentCustomer) {
       setSelectedService(card);
     } else {
-      alert('Please log in to book a service.');
+      alert(language === 'te' ? 'సేవను బుక్ చేయడానికి దయచేసి లాగిన్ అవ్వండి.' : 'Please log in to book a service.');
       navigate('/login');
     }
   };
@@ -24,10 +26,12 @@ const ConsultationsAvailable = () => {
       id: 'muhurtam',
       theme: 'yellow',
       icon: <CalendarClock size={32} strokeWidth={1.5} />,
-      title: 'Muhurtam',
-      desc: 'Find the most auspicious date and time for your important events',
-      features: ['Marriage Muhurat', 'Griha Pravesh Muhurat', 'Business Muhurat', 'Travel Muhurat'],
-      buttonText: 'Book Now',
+      title: t('consultations.muhurtam_title'),
+      desc: t('consultations.muhurtam_desc'),
+      features: language === 'te' 
+        ? ['వివాహ ముహూర్తం', 'గృహప్రవేశ ముహూర్తం', 'వ్యాపార ప్రారంభ ముహూర్తం', 'ప్రయాణ ముహూర్తం']
+        : ['Marriage Muhurat', 'Griha Pravesh Muhurat', 'Business Muhurat', 'Travel Muhurat'],
+      buttonText: t('consultations.book_now_btn'),
       buttonIcon: <Calendar size={16} />,
       buttonVariant: 'book'
     },
@@ -35,10 +39,12 @@ const ConsultationsAvailable = () => {
       id: 'vaastu',
       theme: 'orange',
       icon: <Home size={32} strokeWidth={1.5} />,
-      title: 'Vaastu Consultation',
-      desc: 'Align your living and working spaces with cosmic energies',
-      features: ['Home Vaastu', 'Office Vaastu', 'Plot Vaastu', 'Vaastu Remedies'],
-      buttonText: 'Book Now',
+      title: t('consultations.vaastu_title'),
+      desc: t('consultations.vaastu_desc'),
+      features: language === 'te'
+        ? ['గృహ వాస్తు పరిశీలన', 'ఆఫీస్ & వాణిజ్య వాస్తు', 'స్థల / భూమి వాస్తు', 'వాస్తు దోష నివారణలు']
+        : ['Home Vaastu', 'Office Vaastu', 'Plot Vaastu', 'Vaastu Remedies'],
+      buttonText: t('consultations.book_now_btn'),
       buttonIcon: <Calendar size={16} />,
       buttonVariant: 'book'
     },
@@ -46,10 +52,12 @@ const ConsultationsAvailable = () => {
       id: 'horoscope',
       theme: 'purple',
       icon: <MoonStar size={32} strokeWidth={1.5} />,
-      title: 'Horoscope Reading',
-      desc: 'Detailed analysis of your birth chart for life guidance',
-      features: ['Birth Chart Analysis', 'Career Guidance', 'Relationship Insights', 'Future Predictions'],
-      buttonText: 'Book Now',
+      title: t('consultations.horoscope_title'),
+      desc: t('consultations.horoscope_desc'),
+      features: language === 'te'
+        ? ['జన్మకుండలి విశ్లేషణ', 'ఉద్యోగ & వ్యాపార భవిష్యత్తు', 'వివాహ పొంతనలు', 'శాంతి హోమాలు & పరిహారాలు']
+        : ['Birth Chart Analysis', 'Career Guidance', 'Relationship Insights', 'Future Predictions'],
+      buttonText: t('consultations.book_now_btn'),
       buttonIcon: <Calendar size={16} />,
       buttonVariant: 'book'
     },
@@ -57,10 +65,12 @@ const ConsultationsAvailable = () => {
       id: 'pooja',
       theme: 'green',
       icon: <Flame size={32} strokeWidth={1.5} />,
-      title: 'Book Pandit & Pooja',
-      desc: 'Book experienced pandits for poojas, homams & rituals',
-      features: ['Pooja Booking', 'Homam & Havan', 'Online & Offline Pooja', 'Customized Rituals'],
-      buttonText: 'Book Now',
+      title: t('consultations.book_pandit_title'),
+      desc: t('consultations.book_pandit_desc'),
+      features: language === 'te'
+        ? ['శాస్త్రోక్త పూజా విధానం', 'దివ్య హోమాలు & హవనాలు', 'ప్రత్యక్ష & ఆన్‌లైన్ పూజలు', 'మీ సంప్రదాయానుసారం']
+        : ['Pooja Booking', 'Homam & Havan', 'Online & Offline Pooja', 'Customized Rituals'],
+      buttonText: t('consultations.book_now_btn'),
       buttonIcon: <Calendar size={16} />,
       buttonVariant: 'book'
     }
@@ -73,10 +83,10 @@ const ConsultationsAvailable = () => {
           <img src="/lotus.svg" alt="Lotus" style={{ width: 32, filter: 'sepia(1) hue-rotate(340deg) saturate(5)', opacity: 0.8 }} />
         </div>
         <h2 className="consultations-title">
-          Consultations <span className="highlight-text">Available</span>
+          {t('consultations.title')} <span className="highlight-text">{t('consultations.highlight')}</span>
         </h2>
         <p className="consultations-subtitle">
-          Personalized spiritual guidance for your life journey
+          {t('consultations.subtitle')}
         </p>
       </div>
 
@@ -103,25 +113,6 @@ const ConsultationsAvailable = () => {
                 </li>
               ))}
             </ul>
-
-            {(() => {
-              const consultationData = consultations?.find(c => c.id === card.id);
-              if (consultationData && (consultationData.price || consultationData.discountPrice)) {
-                return (
-                  <div style={{ marginTop: '15px', marginBottom: '15px', textAlign: 'center' }}>
-                    {consultationData.discountPrice ? (
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                        <span style={{ textDecoration: 'line-through', color: '#999', fontSize: '14px' }}>₹{consultationData.price}</span>
-                        <span style={{ color: '#E04E15', fontSize: '18px', fontWeight: 'bold' }}>₹{consultationData.discountPrice}</span>
-                      </div>
-                    ) : (
-                      <div style={{ color: '#E04E15', fontSize: '18px', fontWeight: 'bold' }}>₹{consultationData.price}</div>
-                    )}
-                  </div>
-                );
-              }
-              return null;
-            })()}
 
             <button 
               className={`card-action-btn btn-${card.buttonVariant}`}

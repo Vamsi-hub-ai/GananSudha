@@ -1,5 +1,5 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import AdminDashboard from './pages/AdminDashboard';
 import Layout from './components/Layout';
@@ -14,12 +14,27 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import CustomerProfile from './pages/CustomerProfile';
 import ProductDetail from './pages/ProductDetail';
-import { DataProvider } from './context/DataContext';
+import Videos from './pages/Videos';
+import DevotionalWelcomePopup from './components/DevotionalWelcomePopup';
+import PageSEO from './components/PageSEO';
+import { DataProvider, DataContext } from './context/DataContext';
+import { LanguageProvider } from './context/LanguageContext';
 import './App.css';
+
+function AdminRoute({ children }) {
+  const { currentAdmin, currentCustomer } = useContext(DataContext);
+  if (!currentAdmin || currentCustomer) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+}
 
 function App() {
   return (
-    <DataProvider>
+    <LanguageProvider>
+      <DataProvider>
+        <PageSEO />
+        <DevotionalWelcomePopup />
       <Routes>
         <Route path="/" element={<Layout><Home /></Layout>} />
         <Route path="/poojas" element={<Layout><Poojas /></Layout>} />
@@ -32,9 +47,12 @@ function App() {
         <Route path="/cart" element={<Layout><Cart /></Layout>} />
         <Route path="/checkout" element={<Layout><Checkout /></Layout>} />
         <Route path="/profile" element={<Layout><CustomerProfile /></Layout>} />
-        <Route path="/admin/*" element={<AdminDashboard />} />
+        <Route path="/product/:id" element={<Layout><ProductDetail /></Layout>} />
+        <Route path="/videos" element={<Layout><Videos /></Layout>} />
+        <Route path="/admin/*" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
       </Routes>
-    </DataProvider>
+      </DataProvider>
+    </LanguageProvider>
   );
 }
 

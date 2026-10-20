@@ -1,0 +1,817 @@
+/* ==========================================================================
+   SACRED RITUALS BOOKING UI — Compact Modern Authentic Layout
+   ========================================================================== */
+
+.sacred-rituals-section {
+  padding: 30px 0 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Outer Unified Container - Compact max-width */
+.sacred-booking-card-wrapper {
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  background: linear-gradient(135deg, #FFFDFB 0%, #FAF3EB 100%);
+  border-radius: 22px;
+  border: 1px solid rgba(224, 78, 21, 0.14);
+  box-shadow: 
+    0 16px 45px rgba(43, 29, 20, 0.06),
+    0 3px 12px rgba(224, 78, 21, 0.03);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   LEFT DEVOTIONAL COLUMN (~40%)
+   ========================================================================== */
+.sacred-booking-left {
+  flex: 0 0 38%;
+  padding: 24px 18px 16px 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  overflow: hidden;
+}
+
+/* Hanging Bells & Diyas Top-Left Ornament - Sleek Corner Placement */
+.hanging-diyas-ornament {
+  position: absolute;
+  top: 0;
+  left: 6px;
+  width: 42px;
+  height: 72px;
+  pointer-events: none;
+  z-index: 2;
+  filter: drop-shadow(0 2px 4px rgba(217, 119, 6, 0.25));
+}
+
+/* Subtle Top-Right Mandala Watermark */
+.sacred-mandala-watermark {
+  position: absolute;
+  top: -30px;
+  right: -40px;
+  width: 240px;
+  height: 240px;
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: 0;
+  animation: slowRotateMandala 140s linear infinite;
+}
+
+@keyframes slowRotateMandala {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Left Content Stack - Clear of the Corner Hanging Diyas */
+.sacred-left-content {
+  position: relative;
+  z-index: 1;
+  padding-left: 44px;
+}
+
+/* Typography */
+.sacred-brand-title {
+  margin: 0 0 6px;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.sacred-title-top {
+  font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: #241812;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.sacred-title-highlight {
+  font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+  font-size: 30px;
+  font-weight: 800;
+  color: #E04E15;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #E04E15 0%, #C53018 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sacred-title-sub {
+  font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 600;
+  color: #C66A21;
+  letter-spacing: 2.5px;
+  margin-top: 3px;
+  text-transform: uppercase;
+}
+
+/* Lotus Divider */
+.sacred-divider-lotus {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0 10px;
+}
+
+.sacred-divider-lotus .divider-line {
+  height: 1px;
+  width: 36px;
+  background: linear-gradient(90deg, #E04E15 0%, rgba(224, 78, 21, 0.1) 100%);
+}
+
+.sacred-divider-lotus .divider-line.right {
+  background: linear-gradient(270deg, #E04E15 0%, rgba(224, 78, 21, 0.1) 100%);
+}
+
+.sacred-divider-lotus .lotus-icon {
+  width: 18px;
+  height: 18px;
+  color: #E04E15;
+}
+
+/* Description paragraph */
+.sacred-description {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #55443B;
+  margin: 0 0 16px;
+  max-width: 330px;
+}
+
+/* 3 Feature Value Props */
+.sacred-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.sacred-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sacred-feature-icon-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #FFEDE5;
+  border: 1px solid #FED7C3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #E04E15;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(224, 78, 21, 0.1);
+}
+
+.sacred-feature-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #241812;
+  line-height: 1.3;
+}
+
+/* Bottom Devotional Still Life Image - Expands to Fill Bottom Naturally with Beautiful Framing */
+.sacred-bottom-image-wrapper {
+  margin-top: 14px;
+  flex: 1;
+  display: flex;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  min-height: 200px;
+}
+
+.sacred-devotional-img {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(43, 29, 20, 0.08);
+  border: 1px solid rgba(224, 78, 21, 0.16);
+  display: block;
+}
+
+/* ==========================================================================
+   RIGHT COMPREHENSIVE BOOKING CARD (~60%)
+   ========================================================================== */
+.sacred-booking-right {
+  flex: 1;
+  padding: 16px 16px 16px 0;
+  display: flex;
+}
+
+.booking-form-inner-card {
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 18px;
+  border: 1px solid rgba(224, 78, 21, 0.12);
+  box-shadow: 
+    0 12px 30px rgba(43, 29, 20, 0.04),
+    0 2px 6px rgba(0, 0, 0, 0.02);
+  padding: 22px 26px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card Header */
+.booking-card-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.card-header-lotus-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.card-header-lotus-ornament .header-line {
+  height: 1px;
+  width: 40px;
+  background: linear-gradient(90deg, transparent 0%, #E04E15 100%);
+}
+
+.card-header-lotus-ornament .header-line.right {
+  background: linear-gradient(270deg, transparent 0%, #E04E15 100%);
+}
+
+.card-header-lotus-ornament svg {
+  color: #E04E15;
+  width: 18px;
+  height: 15px;
+}
+
+.booking-card-title {
+  font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+  font-size: 21px;
+  font-weight: 700;
+  color: #241812;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin: 0 0 3px;
+}
+
+.booking-card-subtitle {
+  font-size: 12px;
+  color: #6B7280;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Form Grid */
+.booking-fields-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+/* Two-column layout */
+.booking-row-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* Single Field Container */
+.sacred-input-field {
+  display: flex;
+  align-items: stretch;
+  gap: 9px;
+  position: relative;
+}
+
+/* Icon Box on Left */
+.field-icon-box {
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  background: #FFF5EE;
+  border: 1px solid #FED7C3;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #E04E15;
+  margin-top: 17px;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.sacred-input-field:focus-within .field-icon-box {
+  border-color: #E04E15;
+  background: #FEECE1;
+  box-shadow: 0 0 0 2px rgba(224, 78, 21, 0.1);
+}
+
+/* Input Content Block (Label + Control) */
+.field-control-block {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.field-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #261911;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.field-required {
+  color: #DC2626;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* Inputs, Selects, Textareas */
+.sacred-form-input,
+.sacred-form-select,
+.sacred-form-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 7px 11px;
+  font-size: 12.5px;
+  color: #1F2937;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.sacred-form-input:focus,
+.sacred-form-select:focus,
+.sacred-form-textarea:focus {
+  border-color: #E04E15;
+  box-shadow: 0 0 0 2.5px rgba(224, 78, 21, 0.1);
+  background: #FFFFFF;
+}
+
+.sacred-form-input::placeholder,
+.sacred-form-textarea::placeholder {
+  color: #9CA3AF;
+  font-size: 12.5px;
+}
+
+/* Custom Select Dropdown with Chevron */
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.sacred-form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 30px;
+  cursor: pointer;
+  background-color: #FFFFFF;
+}
+
+.select-chevron-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #6B7280;
+}
+
+/* Phone combined input with country code */
+.phone-input-combined {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  background: #FFFFFF;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.phone-input-combined:focus-within {
+  border-color: #E04E15;
+  box-shadow: 0 0 0 2.5px rgba(224, 78, 21, 0.1);
+}
+
+.phone-country-code {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: #F9FAFB;
+  border-right: 1px solid #E5E7EB;
+  padding: 7px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  cursor: default;
+  user-select: none;
+}
+
+.phone-input-field {
+  flex: 1;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 7px 11px;
+  outline: none;
+  font-size: 12.5px;
+  color: #1F2937;
+}
+
+/* Date input styling */
+.date-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.sacred-form-input[type="date"] {
+  cursor: pointer;
+}
+
+/* Textarea wrapper & character counter */
+.textarea-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.sacred-form-textarea {
+  resize: vertical;
+  min-height: 42px;
+  padding: 6px 10px 17px;
+}
+
+.textarea-char-counter {
+  position: absolute;
+  right: 8px;
+  bottom: 3px;
+  font-size: 9.5px;
+  color: #9CA3AF;
+  pointer-events: none;
+  font-weight: 500;
+}
+
+/* Submit Action Button */
+.booking-submit-btn {
+  margin-top: 6px;
+  width: 100%;
+  background: linear-gradient(135deg, #E04E15 0%, #C53018 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 6px 18px rgba(224, 78, 21, 0.28);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.booking-submit-btn:hover:not(:disabled) {
+  transform: translateY(-1.5px);
+  box-shadow: 0 8px 22px rgba(224, 78, 21, 0.35);
+  background: linear-gradient(135deg, #EB561D 0%, #D1341B 100%);
+}
+
+.booking-submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.booking-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Security footnote */
+.booking-security-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #6B7280;
+  text-align: center;
+}
+
+.booking-security-note svg {
+  color: #4B5563;
+  flex-shrink: 0;
+}
+
+/* Alert Notification Banner */
+.sacred-booking-alert {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.sacred-booking-alert.error {
+  background: #FEF2F2;
+  border: 1px solid #FCA5A5;
+  color: #B91C1C;
+}
+
+/* ==========================================================================
+   CONFIRMATION MODAL / DIALOG (After booking)
+   ========================================================================== */
+.sacred-success-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 14, 10, 0.72);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.sacred-success-modal {
+  background: #FFFFFF;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 100%;
+  padding: 28px 24px 22px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  text-align: center;
+  animation: slideUpScale 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpScale {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.sacred-success-icon-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ECFDF5;
+  border: 2px solid #A7F3D0;
+  color: #059669;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  box-shadow: 0 6px 16px rgba(5, 150, 105, 0.16);
+}
+
+.sacred-success-title {
+  font-family: 'Cinzel', serif;
+  font-size: 21px;
+  font-weight: 700;
+  color: #241812;
+  margin: 0 0 5px;
+}
+
+.sacred-success-subtitle {
+  font-size: 13px;
+  color: #6B7280;
+  margin: 0 0 16px;
+  line-height: 1.45;
+}
+
+.sacred-booking-ref-box {
+  background: #FFF9F3;
+  border: 1px dashed #E04E15;
+  border-radius: 12px;
+  padding: 11px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.booking-ref-text-left {
+  text-align: left;
+}
+
+.booking-ref-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #92400E;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.booking-ref-value {
+  font-size: 15px;
+  font-weight: 800;
+  color: #E04E15;
+  font-family: monospace;
+}
+
+.booking-copy-btn {
+  background: #FFFFFF;
+  border: 1px solid #FED7C3;
+  color: #E04E15;
+  padding: 5px 10px;
+  border-radius: 7px;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.booking-copy-btn:hover {
+  background: #E04E15;
+  color: #FFFFFF;
+}
+
+.sacred-success-details-list {
+  background: #F9FAFB;
+  border-radius: 10px;
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 12.5px;
+  color: #374151;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.success-detail-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.success-detail-row span:first-child {
+  color: #6B7280;
+}
+
+.success-detail-row span:last-child {
+  font-weight: 600;
+  color: #1F2937;
+}
+
+.sacred-success-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.sacred-success-actions button {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sacred-btn-outline {
+  background: #FFFFFF;
+  border: 1px solid #D1D5DB;
+  color: #374151;
+}
+
+.sacred-btn-outline:hover {
+  background: #F3F4F6;
+}
+
+.sacred-btn-primary {
+  background: #E04E15;
+  border: none;
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(224, 78, 21, 0.25);
+}
+
+.sacred-btn-primary:hover {
+  background: #C53018;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .sacred-booking-card-wrapper {
+    flex-direction: column;
+    border-radius: 20px;
+    margin: 0 16px;
+  }
+
+  .sacred-booking-left {
+    flex: none;
+    width: 100%;
+    padding: 24px 20px 0;
+    box-sizing: border-box;
+  }
+
+  .sacred-booking-right {
+    padding: 0 16px 20px;
+  }
+
+  .sacred-bottom-image-wrapper {
+    padding-right: 0;
+  }
+
+  .sacred-devotional-img {
+    height: 160px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(224, 78, 21, 0.16);
+  }
+}
+
+@media (max-width: 640px) {
+  .sacred-rituals-section {
+    padding: 24px 0 40px;
+  }
+
+  .sacred-booking-card-wrapper {
+    margin: 0 8px;
+    border-radius: 16px;
+  }
+
+  .sacred-booking-left {
+    padding: 20px 14px 0;
+  }
+
+  .sacred-left-content {
+    padding-left: 0;
+  }
+
+  .hanging-diyas-ornament {
+    display: none;
+  }
+
+  .sacred-title-top,
+  .sacred-title-highlight {
+    font-size: 24px;
+  }
+
+  .sacred-title-sub {
+    font-size: 13px;
+    letter-spacing: 1.5px;
+  }
+
+  .booking-form-inner-card {
+    padding: 18px 14px 16px;
+    border-radius: 16px;
+  }
+
+  .booking-card-title {
+    font-size: 18px;
+  }
+
+  .booking-row-2col {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .field-icon-box {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    margin-top: 16px;
+  }
+
+  .sacred-devotional-img {
+    height: 140px;
+  }
+}

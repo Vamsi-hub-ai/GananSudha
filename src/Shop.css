@@ -5,91 +5,854 @@
 }
 
 /* Hero Section */
-.shop-hero {
+/* ==========================================================================
+   FLAGSHIP PANORAMIC SACRED ALTAR SANCTUARY HERO — ULTRA-PREMIUM VEDIC UI
+   ========================================================================== */
+.shop-flagship-hero {
+  max-width: 1400px;
+  margin: 12px auto 28px;
+  padding: 0 24px;
+}
+
+.shop-flagship-stage {
   position: relative;
-  background: linear-gradient(100deg, #fef4e8 0%, #fbd5c0 100%);
-  border-radius: 12px;
-  margin: 24px;
+  background: radial-gradient(circle at 72% 35%, rgba(254, 240, 199, 0.5) 0%, rgba(255, 252, 247, 0.9) 45%, #FFFDF8 100%);
+  border: 1.5px solid rgba(212, 175, 55, 0.38);
+  border-radius: 28px;
+  box-shadow: 0 24px 60px -15px rgba(197, 48, 24, 0.11), 0 6px 24px rgba(43, 29, 20, 0.03);
   overflow: hidden;
-  display: flex;
-  min-height: 400px;
 }
 
-.shop-hero-content {
-  flex: 1;
-  padding: 60px 80px;
+.shop-stage-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.88fr;
+  align-items: center;
+  gap: 36px;
+  padding: 30px 40px 20px;
+  position: relative;
   z-index: 2;
+}
+
+/* Left Editorial Sanctum Column */
+.shop-editorial-col {
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
-.shop-hero-title {
-  font-size: 42px;
-  font-weight: 400;
-  color: #333;
-  margin-bottom: 8px;
-  line-height: 1.2;
+.shop-flagship-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 247, 237, 0.9);
+  border: 1px solid rgba(234, 88, 12, 0.3);
+  padding: 5px 12px;
+  border-radius: 30px;
+  width: fit-content;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.08);
 }
 
-.shop-hero-title span {
-  color: #e25822;
-  font-weight: 600;
-  display: block;
+.shop-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #16A34A;
+  box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+  animation: shopBeaconPulse 2s infinite;
 }
 
-.shop-hero-subtitle {
-  font-size: 16px;
-  color: #555;
-  margin-top: 24px;
-  margin-bottom: 40px;
-  max-width: 400px;
-  line-height: 1.5;
+@keyframes shopBeaconPulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(22, 163, 74, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
+  }
 }
 
-.shop-hero-features {
+.shop-live-text {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  color: #B45309;
+}
+
+.shop-flagship-title {
+  font-family: var(--font-heading, 'Cinzel', serif);
+  font-size: 38px;
+  font-weight: 800;
+  color: #2B1D14;
+  line-height: 1.15;
+  margin: 0 0 10px 0;
+  letter-spacing: 1.2px;
+}
+
+.shop-gold-gradient-text {
+  background: linear-gradient(135deg, #C53018 0%, #E04E15 50%, #D97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  font-weight: 900;
+}
+
+.shop-flagship-sub {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #5D4B3E;
+  margin: 0 0 18px 0;
+  max-width: 530px;
+}
+
+/* Integrated Hero Quick-Search Bar */
+.shop-hero-search-wrapper {
+  margin-bottom: 20px;
+  max-width: 540px;
+}
+
+.shop-hero-search-bar {
   display: flex;
-  gap: 30px;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(212, 175, 55, 0.45);
+  border-radius: 50px;
+  padding: 4px 6px 4px 18px;
+  box-shadow: 0 8px 24px rgba(197, 48, 24, 0.06);
+  transition: all 0.25s ease;
 }
 
-.hero-feature-item {
+.shop-hero-search-bar:focus-within {
+  border-color: #C53018;
+  box-shadow: 0 10px 28px rgba(197, 48, 24, 0.14);
+}
+
+.shop-hero-search-icon {
+  color: #C53018;
+  flex-shrink: 0;
+  margin-right: 10px;
+}
+
+.shop-hero-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14.5px;
+  font-family: inherit;
+  color: #2B1D14;
+  background: transparent;
+  padding: 9px 0;
+}
+
+.shop-hero-search-input::placeholder {
+  color: #9C8E84;
+  font-size: 13.5px;
+}
+
+.shop-hero-search-clear-btn {
+  background: rgba(197, 48, 24, 0.1);
+  border: none;
+  color: #C53018;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 6px;
+  transition: background 0.2s;
+}
+
+.shop-hero-search-clear-btn:hover {
+  background: rgba(197, 48, 24, 0.2);
+}
+
+.shop-hero-search-action-btn {
+  background: linear-gradient(135deg, #C53018 0%, #E04E15 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 40px;
+  padding: 9px 20px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  box-shadow: 0 4px 12px rgba(197, 48, 24, 0.3);
+}
+
+.shop-hero-search-action-btn:hover {
+  background: linear-gradient(135deg, #A82510 0%, #C53018 100%);
+  transform: translateY(-1px);
+}
+
+/* Interactive Ritual Intent Pills (Unique Quick Category Switcher) */
+.shop-intent-nav-wrap {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 90px;
+  gap: 9px;
+  margin-bottom: 24px;
 }
 
-.hero-feature-icon {
-  width: 48px;
-  height: 48px;
-  background-color: white;
-  border-radius: 12px;
+.shop-intent-nav-label {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 12px;
-  color: #e25822;
-  box-shadow: 0 4px 12px rgba(226, 88, 34, 0.1);
-}
-
-.hero-feature-text {
+  gap: 6px;
   font-size: 12px;
-  color: #444;
-  font-weight: 500;
+  font-weight: 700;
+  color: #786C63;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.shop-intent-pills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.shop-intent-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: #3E2F24;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 7px 14px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.shop-intent-pill:hover {
+  background: #FFFFFF;
+  border-color: #C53018;
+  color: #C53018;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(197, 48, 24, 0.12);
+}
+
+.shop-intent-pill.active {
+  background: linear-gradient(135deg, #C53018 0%, #E04E15 100%);
+  color: #FFFFFF;
+  border-color: transparent;
+  box-shadow: 0 6px 18px rgba(197, 48, 24, 0.35);
+  font-weight: 700;
+}
+
+.shop-intent-emoji {
+  font-size: 14px;
+}
+
+/* Live Devotee Verification Row */
+.shop-flagship-metrics {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 6px;
+  padding-top: 18px;
+  border-top: 1px dashed rgba(212, 175, 55, 0.4);
+  max-width: 520px;
+}
+
+.shop-metric-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-metric-val {
+  font-family: var(--font-heading, 'Cinzel', serif);
+  font-size: 18px;
+  font-weight: 800;
+  color: #C53018;
+}
+
+.shop-metric-lbl {
+  font-size: 11.5px;
+  color: #786C63;
+  margin-top: 1px;
+}
+
+.shop-metric-sep {
+  width: 1px;
+  height: 26px;
+  background: rgba(212, 175, 55, 0.35);
+}
+
+/* Right Altar Panorama Canvas & Hotspots */
+.shop-altar-canvas-col {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Master Sacred Altar Showcase Card */
+.shop-altar-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: linear-gradient(150deg, #FFFFFF 0%, #FFFDF8 50%, #FEF9EE 100%);
+  border: 1.5px solid rgba(212, 175, 55, 0.5);
+  border-radius: 28px;
+  padding: 16px;
+  box-shadow: 
+    0 24px 50px rgba(197, 48, 24, 0.12),
+    0 6px 20px rgba(212, 175, 55, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.shop-altar-card:hover {
+  box-shadow: 
+    0 28px 60px rgba(197, 48, 24, 0.16),
+    0 8px 26px rgba(212, 175, 55, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Ornate Corner Filigree Accents */
+.shop-altar-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.shop-altar-corner.top-left {
+  top: 8px;
+  left: 8px;
+  border-top: 2px solid #D4AF37;
+  border-left: 2px solid #D4AF37;
+  border-top-left-radius: 8px;
+}
+
+.shop-altar-corner.top-right {
+  top: 8px;
+  right: 8px;
+  border-top: 2px solid #D4AF37;
+  border-right: 2px solid #D4AF37;
+  border-top-right-radius: 8px;
+}
+
+.shop-altar-corner.bottom-left {
+  bottom: 8px;
+  left: 8px;
+  border-bottom: 2px solid #D4AF37;
+  border-left: 2px solid #D4AF37;
+  border-bottom-left-radius: 8px;
+}
+
+.shop-altar-corner.bottom-right {
+  bottom: 8px;
+  right: 8px;
+  border-bottom: 2px solid #D4AF37;
+  border-right: 2px solid #D4AF37;
+  border-bottom-right-radius: 8px;
+}
+
+/* Card Header Strip */
+.shop-altar-header-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+
+.shop-altar-badge-live {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #8B2500;
+  font-family: var(--font-heading, 'Cinzel', serif);
+  letter-spacing: 0.4px;
+}
+
+.shop-altar-flame-icon {
+  font-size: 14px;
+  filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.8));
+}
+
+.shop-altar-consecrated-tag {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #2E7D32;
+  background: rgba(46, 125, 50, 0.08);
+  padding: 3px 9px;
+  border-radius: 20px;
+  border: 1px solid rgba(46, 125, 50, 0.2);
+}
+
+/* Center Image Scene */
+.shop-altar-scene {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  overflow: visible;
+  box-shadow: 0 12px 32px rgba(43, 29, 20, 0.16);
+  border: 1.5px solid rgba(212, 175, 55, 0.45);
+}
+
+.shop-altar-main-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  display: block;
+  object-fit: cover;
+}
+
+.shop-altar-vignette {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(43, 29, 20, 0.25) 100%);
+  z-index: 1;
+}
+
+.shop-altar-glow-aura {
+  position: absolute;
+  inset: -12px;
+  border-radius: 28px;
+  background: radial-gradient(circle at center, rgba(245, 158, 11, 0.22) 0%, transparent 72%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Hotspot Pins & Pulse Rings */
+.shop-hotspot-anchor {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 12;
+  cursor: pointer;
+}
+
+.shop-hotspot-pin {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #D4AF37;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22), 0 0 14px rgba(245, 158, 11, 0.55);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.shop-hotspot-anchor:hover .shop-hotspot-pin,
+.shop-hotspot-anchor.is-active .shop-hotspot-pin {
+  transform: scale(1.22);
+  border-color: #C53018;
+  background: #FFFFFF;
+  box-shadow: 0 6px 22px rgba(197, 48, 24, 0.45), 0 0 18px rgba(245, 158, 11, 0.8);
+}
+
+.shop-hotspot-center {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.shop-hotspot-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid #F59E0B;
+  animation: shopHotspotRing 2.4s infinite cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+}
+
+@keyframes shopHotspotRing {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+/* Floating Hotspot Tooltip Card */
+.shop-hotspot-tooltip {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  width: 270px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(212, 175, 55, 0.6);
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: 0 18px 40px -6px rgba(43, 29, 20, 0.32), 0 0 24px rgba(212, 175, 55, 0.22);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 25;
+}
+
+.shop-hotspot-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 7px;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.98) transparent transparent transparent;
+}
+
+.shop-hotspot-anchor:hover .shop-hotspot-tooltip,
+.shop-hotspot-anchor.is-active .shop-hotspot-tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.shop-tooltip-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+
+.shop-tooltip-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.shop-tooltip-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.shop-tooltip-title {
+  font-size: 13.5px;
+  color: #2B1D14;
+  font-weight: 800;
   line-height: 1.3;
 }
 
-.shop-hero-bg {
+.shop-tooltip-price {
+  font-size: 11.5px;
+  color: #C53018;
+  font-weight: 700;
+}
+
+.shop-tooltip-desc {
+  font-size: 12px;
+  color: #5D4B3E;
+  line-height: 1.45;
+  margin: 0 0 11px 0;
+}
+
+.shop-tooltip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #C53018 0%, #E04E15 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.shop-tooltip-btn:hover {
+  background: linear-gradient(135deg, #A82510 0%, #C53018 100%);
+  transform: translateX(2px);
+}
+
+/* Interactive Altar Item Quick-Nav Selector Strip */
+.shop-altar-quick-nav {
+  margin-top: 14px;
+}
+
+.shop-altar-quick-nav-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #786C63;
+  margin-bottom: 8px;
+  padding-left: 2px;
+}
+
+.shop-altar-chips-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.shop-altar-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: #FFFFFF;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: #4A3B32;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+}
+
+.shop-altar-chip:hover {
+  border-color: #D4AF37;
+  background: #FFFDF7;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(212, 175, 55, 0.15);
+}
+
+.shop-altar-chip.active {
+  background: linear-gradient(135deg, #C53018 0%, #E04E15 100%);
+  color: #FFFFFF;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(197, 48, 24, 0.35);
+  font-weight: 700;
+}
+
+.shop-altar-chip.active .shop-chip-label {
+  color: #FFFFFF;
+}
+
+.shop-chip-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.shop-chip-label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Altar Hint Pill */
+.shop-altar-hint-pill {
   position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 55%;
-  object-fit: cover;
-  z-index: 1;
-  mask-image: linear-gradient(to right, transparent, black 20%);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 20%);
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  color: #2B1D14;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 30px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.shop-hint-sparkle {
+  color: #D97706;
+  animation: shopSparkleSpin 3s linear infinite;
+}
+
+@keyframes shopSparkleSpin {
+  0% { transform: rotate(0deg) scale(0.9); }
+  50% { transform: rotate(180deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(0.9); }
+}
+
+/* ==========================================================================
+   LUXURY FLOATING FROSTED GLASS DOCK (HORIZONTAL SANCTUARY PILLARS)
+   ========================================================================== */
+.shop-luxury-dock {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1.5px solid rgba(212, 175, 55, 0.32);
+  padding: 14px 28px;
+  position: relative;
+  z-index: 3;
+}
+
+.shop-dock-pillar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 12px;
+  border-radius: 14px;
+  transition: all 0.24s ease;
+  position: relative;
+}
+
+.shop-dock-pillar:hover {
+  background: #FFFFFF;
+  box-shadow: 0 8px 20px rgba(197, 48, 24, 0.08);
+  transform: translateY(-2px);
+}
+
+.shop-dock-num {
+  font-family: var(--font-heading, 'Cinzel', serif);
+  font-size: 16px;
+  font-weight: 800;
+  color: rgba(212, 175, 55, 0.45);
+  letter-spacing: 0.5px;
+}
+
+.shop-dock-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.shop-dock-icon-wrap.icon-amber {
+  background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
+  color: #C53018;
+  border: 1.5px solid #FED7AA;
+}
+
+.shop-dock-icon-wrap.icon-emerald {
+  background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+  color: #059669;
+  border: 1.5px solid #A7F3D0;
+}
+
+.shop-dock-icon-wrap.icon-gold {
+  background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+  color: #B45309;
+  border: 1.5px solid #FDE68A;
+}
+
+.shop-dock-icon-wrap.icon-saffron {
+  background: linear-gradient(135deg, #FFF4ED 0%, #FFE5D4 100%);
+  color: #EA580C;
+  border: 1.5px solid #FFD0B5;
+}
+
+.shop-dock-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-dock-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #2B1D14;
+  line-height: 1.3;
+}
+
+.shop-dock-sub {
+  font-size: 11.5px;
+  color: #786C63;
+  margin-top: 2px;
+}
+
+.shop-dock-divider {
+  width: 1px;
+  height: 38px;
+  background: rgba(212, 175, 55, 0.3);
+}
+
+/* Responsive Breakpoints for Flagship Hero */
+@media (max-width: 1120px) {
+  .shop-stage-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 36px 30px;
+    text-align: center;
+  }
+  .shop-editorial-col {
+    align-items: center;
+  }
+  .shop-flagship-sub {
+    max-width: 100%;
+  }
+  .shop-hero-search-wrapper {
+    width: 100%;
+    max-width: 480px;
+  }
+  .shop-intent-nav-wrap {
+    align-items: center;
+  }
+  .shop-intent-pills-row {
+    justify-content: center;
+  }
+  .shop-flagship-metrics {
+    justify-content: center;
+  }
+  .shop-luxury-dock {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 24px;
+  }
+  .shop-dock-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .shop-flagship-hero {
+    margin: 12px auto 24px;
+    padding: 0 12px;
+  }
+  .shop-flagship-stage {
+    border-radius: 20px;
+  }
+  .shop-stage-grid {
+    padding: 24px 16px;
+    gap: 28px;
+  }
+  .shop-flagship-title {
+    font-size: 28px;
+  }
+  .shop-flagship-sub {
+    font-size: 13.5px;
+  }
+  .shop-luxury-dock {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 18px 16px;
+  }
+  .shop-altar-scene {
+    max-width: 100%;
+  }
+  .shop-hotspot-tooltip {
+    width: 220px;
+  }
 }
 
 /* Category Carousel */
@@ -177,9 +940,10 @@
 }
 
 /* Main Shop Layout */
+/* Main Shop Layout */
 .shop-main-layout {
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 260px minmax(0, 1fr);
   gap: 32px;
   margin: 0 24px;
 }
@@ -274,12 +1038,113 @@
   color: #e25822;
 }
 
-/* Product Grid */
+/* Product Grid & Content Area */
 .shop-content-area {
   background-color: white;
   border-radius: 16px;
   padding: 24px 32px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Shop Empty State Card */
+.shop-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+  background: #FFFDF9;
+  border-radius: 20px;
+  border: 1.5px dashed #E5D5C8;
+  width: 100%;
+  max-width: 580px;
+  margin: 24px auto 32px auto;
+  box-shadow: 0 4px 20px rgba(43, 33, 24, 0.03);
+}
+
+.empty-state-icon-halo {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: #FAF3EA;
+  border: 2px solid #EFE4D6;
+  color: #C53018;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(197, 48, 24, 0.08);
+}
+
+.empty-state-title {
+  font-family: 'Cinzel', serif;
+  font-size: 21px;
+  font-weight: 700;
+  color: #2B2118;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.empty-state-desc {
+  font-size: 14px;
+  color: #6E5A4D;
+  max-width: 440px;
+  margin: 0 auto 24px auto;
+  line-height: 1.6;
+}
+
+.empty-state-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.empty-state-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #C53018 0%, #E86A33 100%);
+  color: #FFFFFF;
+  border: none;
+  padding: 11px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(197, 48, 24, 0.25);
+  transition: all 0.2s ease;
+}
+
+.empty-state-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(197, 48, 24, 0.35);
+}
+
+.empty-state-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FAF4EF;
+  color: #4A3B32;
+  border: 1px solid #E6D8CE;
+  padding: 11px 22px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.empty-state-btn-secondary:hover {
+  background: #FFF0E8;
+  border-color: #C53018;
+  color: #C53018;
 }
 
 .shop-content-header {
@@ -477,4 +1342,147 @@
 .btn-wishlist:hover {
   border-color: #e25822;
   color: #e25822;
+}
+
+/* Shop Responsive Styles */
+@media (max-width: 1023px) {
+  .shop-hero {
+    margin: 16px 20px 24px;
+    min-height: 340px;
+  }
+  .shop-hero-content {
+    padding: 40px;
+  }
+  .shop-main-layout {
+    grid-template-columns: 220px 1fr;
+    margin: 0 20px;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .shop-hero {
+    flex-direction: column;
+    min-height: auto;
+    margin: 16px 16px 24px;
+  }
+  .shop-hero-content {
+    padding: 32px 20px;
+  }
+  .shop-hero-bg {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .shop-hero-title {
+    font-size: clamp(24px, 5vw, 36px);
+  }
+  .shop-hero-features {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .shop-main-layout {
+    grid-template-columns: 1fr;
+    margin: 0 16px;
+    gap: 20px;
+  }
+  .shop-sidebar {
+    padding: 16px;
+    border-radius: 12px;
+  }
+  .shop-sidebar-title {
+    font-size: 15px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+  }
+  .shop-sidebar-menu {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    max-height: none;
+    gap: 8px;
+  }
+  .shop-sidebar-item {
+    flex-shrink: 0;
+    border: 1px solid #eaeaea;
+    border-radius: 20px;
+    padding: 8px 14px;
+    white-space: nowrap;
+  }
+  .shop-sidebar-item.active::before {
+    display: none;
+  }
+  .shop-sidebar-item.active {
+    background-color: #FFF0E8;
+    border-color: #e25822;
+  }
+}
+
+@media (max-width: 575px) {
+  .shop-hero {
+    margin: 12px 12px 20px;
+    border-radius: 12px;
+  }
+  .shop-hero-content {
+    padding: 24px 16px;
+  }
+  .shop-hero-subtitle {
+    margin-top: 12px;
+    margin-bottom: 24px;
+    font-size: 14px;
+  }
+  .hero-feature-item {
+    max-width: 80px;
+  }
+  .hero-feature-icon {
+    width: 40px;
+    height: 40px;
+  }
+  .shop-main-layout {
+    margin: 0 12px;
+  }
+  .shop-content-area {
+    padding: 16px 12px;
+    border-radius: 12px;
+  }
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr));
+    gap: 12px;
+  }
+  .product-card {
+    padding: 12px;
+    border-radius: 12px;
+  }
+  .product-image-container {
+    height: 140px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .product-title {
+    font-size: 13.5px;
+  }
+  .product-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+  .product-price {
+    font-size: 15px;
+  }
+  .product-rating {
+    margin-bottom: 10px;
+  }
+  .btn-add-cart {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .btn-wishlist {
+    width: 36px;
+    height: 36px;
+  }
 }

@@ -1,0 +1,22 @@
+{
+  "name": "Gnana Sudha — Divine Services & Vedic Tradition",
+  "short_name": "Gnana Sudha",
+  "description": "Authentic Vedic poojas, verified scholarly priests & pure essentials across Hyderabad, Andhra Pradesh & Telangana.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFBF7",
+  "theme_color": "#C53018",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

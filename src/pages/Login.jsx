@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { DataContext } from '../context/DataContext';
-import { Mail, Lock, User } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import { Mail, Lock } from 'lucide-react';
 import '../App.css';
 
 export default function Login() {
@@ -9,6 +10,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { unifiedLogin, loginWithGoogle } = useContext(DataContext);
+  const { t, isTelugu } = useLanguage();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -275,8 +277,8 @@ export default function Login() {
         {/* Left Panel */}
         <div className="login-left-panel">
           <div className="left-content">
-            <h1 className="welcome-text-large">Welcome</h1>
-            <h1 className="back-text-large">Back</h1>
+            <h1 className="welcome-text-large">{isTelugu ? 'స్వాగతం' : 'Welcome'}</h1>
+            <h1 className="back-text-large">{isTelugu ? 'మళ్ళీ' : 'Back'}</h1>
             
             <div className="lotus-divider left-aligned">
               <div className="lotus-line"></div>
@@ -291,10 +293,11 @@ export default function Login() {
             </div>
             
             <p className="left-subtitle">
-              Continue your spiritual journey<br/>
-              with Gnana Sudha.<br/>
-              Access your bookings,<br/>
-              consultations and more.
+              {isTelugu ? (
+                <>జ్ఞాన సుధతో మీ ఆధ్యాత్మిక ప్రయాణాన్ని కొనసాగించండి.<br/>మీ పూజా బుకింగ్‌లు, సంప్రదింపులను సులభంగా వీక్షించండి.</>
+              ) : (
+                <>Continue your spiritual journey<br/>with Gnana Sudha.<br/>Access your bookings,<br/>consultations and more.</>
+              )}
             </p>
           </div>
         </div>
@@ -303,7 +306,9 @@ export default function Login() {
         <div className="login-right-panel">
           <div style={{ textAlign: 'center', marginBottom: '24px' }}>
             <img src="/assets/logo.jpeg" alt="Gnana Sudha" style={{ height: '70px', objectFit: 'contain', borderRadius: '50%', marginBottom: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }} />
-            <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: '26px', color: '#2B1D14', margin: '0 0 8px 0', fontWeight: '700' }}>Welcome Back</h2>
+            <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: '26px', color: '#2B1D14', margin: '0 0 8px 0', fontWeight: '700' }}>
+              {isTelugu ? 'జ్ఞాన సుధకు స్వాగతం' : 'Welcome Back'}
+            </h2>
             
             <div className="lotus-divider" style={{ width: '120px', margin: '0 auto 12px auto' }}>
               <div className="lotus-line"></div>
@@ -317,7 +322,9 @@ export default function Login() {
               <div className="lotus-line"></div>
             </div>
             
-            <p style={{ color: '#9B8B84', fontSize: '14px', margin: 0 }}>Log in to access your account</p>
+            <p style={{ color: '#9B8B84', fontSize: '14px', margin: 0 }}>
+              {isTelugu ? 'మీ ఖాతాలోకి ప్రవేశించడానికి వివరాలను నమోదు చేయండి' : 'Log in to access your account'}
+            </p>
           </div>
           
           {error && (
@@ -328,27 +335,27 @@ export default function Login() {
 
           <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column' }}>
             <div className="input-group">
-              <label>Email or Username</label>
+              <label>{isTelugu ? 'ఈమెయిల్ లేదా యూజర్‌నేమ్' : 'Email or Username'}</label>
               <Mail size={18} className="input-icon" />
               <input 
                 type="text" 
                 className="styled-input" 
                 value={loginId} 
                 onChange={e => setLoginId(e.target.value)} 
-                placeholder="Enter your email or username" 
+                placeholder={isTelugu ? 'ఈమెయిల్ లేదా యూజర్‌నేమ్ నమోదు చేయండి' : 'Enter your email or username'} 
                 required 
               />
             </div>
             
             <div className="input-group" style={{ marginBottom: '8px' }}>
-              <label>Password</label>
+              <label>{isTelugu ? 'పాస్‌వర్డ్' : 'Password'}</label>
               <Lock size={18} className="input-icon" />
               <input 
                 type={showPassword ? "text" : "password"} 
                 className="styled-input" 
                 value={password} 
                 onChange={e => setPassword(e.target.value)} 
-                placeholder="Enter your password"
+                placeholder={isTelugu ? 'మీ పాస్‌వర్డ్ నమోదు చేయండి' : 'Enter your password'}
                 required 
               />
               <svg onClick={togglePasswordVisibility} className="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -367,11 +374,13 @@ export default function Login() {
             </div>
             
             <div style={{ textAlign: 'right', marginBottom: '20px' }}>
-              <Link to="/forgot-password" style={{ color: '#C53018', fontSize: '12px', fontWeight: '600', textDecoration: 'none' }}>Forgot Password?</Link>
+              <Link to="/forgot-password" style={{ color: '#C53018', fontSize: '12px', fontWeight: '600', textDecoration: 'none' }}>
+                {isTelugu ? 'పాస్‌వర్డ్ మర్చిపోయారా?' : 'Forgot Password?'}
+              </Link>
             </div>
             
             <button type="submit" className="login-btn">
-              Log In
+              {isTelugu ? 'లాగిన్ అవ్వండి' : 'Log In'}
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
@@ -379,17 +388,17 @@ export default function Login() {
             </button>
             
             <div className="or-divider">
-              <span className="or-text">OR</span>
+              <span className="or-text">{isTelugu ? 'లేదా' : 'OR'}</span>
             </div>
             
             <button type="button" onClick={handleGoogleLogin} className="google-btn">
               <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" style={{ width: '20px', height: '20px' }} />
-              Continue with Google
+              {isTelugu ? 'గూగుల్‌తో కొనసాగించండి' : 'Continue with Google'}
             </button>
           </form>
           
           <div className="signup-box">
-            Don't have an account? <Link to="/register" className="signup-link">Sign up</Link>
+            {isTelugu ? 'ఇంకా ఖాతా లేదా?' : "Don't have an account?"} <Link to="/register" className="signup-link">{isTelugu ? 'ఖాతాను సృష్టించండి' : 'Sign up'}</Link>
           </div>
         </div>
       </div>
