@@ -2,8 +2,9 @@
 -- Run this in Hostinger phpMyAdmin (SQL tab) if you want an immediate manual fix.
 -- Note: The Node.js backend also executes these migrations automatically on startup!
 
--- 1. Ensure pandits table exists and has all required columns and nullable credentials
-CREATE TABLE IF NOT EXISTS pandits (
+-- 1. Recreate pandits table cleanly with LONGTEXT image support and all columns
+DROP TABLE IF EXISTS pandits;
+CREATE TABLE pandits (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NULL,
     password VARCHAR(255) NULL DEFAULT 'password123',
@@ -21,15 +22,6 @@ CREATE TABLE IF NOT EXISTS pandits (
     bio TEXT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-ALTER TABLE pandits MODIFY COLUMN img LONGTEXT NULL;
-ALTER TABLE pandits ADD COLUMN IF NOT EXISTS experience VARCHAR(100) DEFAULT '5+ Years';
-ALTER TABLE pandits ADD COLUMN IF NOT EXISTS languages VARCHAR(255) DEFAULT 'Telugu, Sanskrit, Hindi';
-ALTER TABLE pandits ADD COLUMN IF NOT EXISTS city VARCHAR(100) DEFAULT 'Hyderabad, Telangana';
-ALTER TABLE pandits ADD COLUMN IF NOT EXISTS bio TEXT NULL;
-ALTER TABLE pandits MODIFY COLUMN username VARCHAR(255) NULL;
-ALTER TABLE pandits MODIFY COLUMN password VARCHAR(255) NULL DEFAULT 'password123';
-ALTER TABLE pandits MODIFY COLUMN status VARCHAR(50) DEFAULT 'Approved';
 
 -- 2. Upgrade image columns to LONGTEXT to support Base64 images and URLs without truncation
 ALTER TABLE poojas MODIFY COLUMN img LONGTEXT NULL;
