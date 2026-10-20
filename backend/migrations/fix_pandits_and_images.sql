@@ -2,9 +2,28 @@
 -- Run this in Hostinger phpMyAdmin (SQL tab) if you want an immediate manual fix.
 -- Note: The Node.js backend also executes these migrations automatically on startup!
 
--- 1. Ensure pandits table has all required columns and nullable credentials
+-- 1. Ensure pandits table exists and has all required columns and nullable credentials
+CREATE TABLE IF NOT EXISTS pandits (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NULL,
+    password VARCHAR(255) NULL DEFAULT 'password123',
+    name VARCHAR(255) NOT NULL,
+    phone VARCHAR(50) NULL,
+    specialization VARCHAR(255) DEFAULT 'Vedic Rituals',
+    experience VARCHAR(100) DEFAULT '5+ Years',
+    rating VARCHAR(10) DEFAULT '5.0',
+    reviews VARCHAR(10) DEFAULT '0',
+    status VARCHAR(50) DEFAULT 'Approved',
+    gender VARCHAR(20) DEFAULT 'male',
+    img LONGTEXT NULL,
+    languages VARCHAR(255) DEFAULT 'Telugu, Sanskrit, Hindi',
+    city VARCHAR(100) DEFAULT 'Hyderabad, Telangana',
+    bio TEXT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE pandits MODIFY COLUMN img LONGTEXT NULL;
 ALTER TABLE pandits ADD COLUMN IF NOT EXISTS experience VARCHAR(100) DEFAULT '5+ Years';
-ALTER TABLE pandits ADD COLUMN IF NOT EXISTS img LONGTEXT NULL;
 ALTER TABLE pandits ADD COLUMN IF NOT EXISTS languages VARCHAR(255) DEFAULT 'Telugu, Sanskrit, Hindi';
 ALTER TABLE pandits ADD COLUMN IF NOT EXISTS city VARCHAR(100) DEFAULT 'Hyderabad, Telangana';
 ALTER TABLE pandits ADD COLUMN IF NOT EXISTS bio TEXT NULL;

@@ -513,9 +513,11 @@ function loadStore() {
     }
     const data = fs.readFileSync(STORE_PATH, 'utf8');
     const parsed = JSON.parse(data);
-    // Ensure all tables exist
+    // Ensure all tables exist with initial defaults if empty
     for (const key of Object.keys(DEFAULT_STORE)) {
-      if (!parsed[key]) parsed[key] = DEFAULT_STORE[key];
+      if (!parsed[key] || (Array.isArray(parsed[key]) && parsed[key].length === 0 && DEFAULT_STORE[key] && DEFAULT_STORE[key].length > 0)) {
+        parsed[key] = JSON.parse(JSON.stringify(DEFAULT_STORE[key]));
+      }
     }
     return parsed;
   } catch (e) {
@@ -1156,11 +1158,11 @@ async function executeLocalQuery(sql, values = []) {
     return [{ affectedRows: 0 }, []];
   }
 
-  // 8. DELETE FROM <table> WHERE id = ?
-  const deleteMatch = trimmed.match(/^DELETE FROM `?(\w+)`? WHERE id = \?$/i);
+  // 8. DELETE FROM <table> WHERE id = ? or WHERE id = <number>
+  const deleteMatch = trimmed.match(/^DELETE FROM `?(\w+)`? WHERE id = (\?|\d+)$/i);
   if (deleteMatch) {
     const table = deleteMatch[1];
-    const id = values[0];
+    const id = deleteMatch[2] === '?' ? values[0] : deleteMatch[2];
     if (store[table]) {
       const before = store[table].length;
       store[table] = store[table].filter(r => String(r.id) !== String(id));

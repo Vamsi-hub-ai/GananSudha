@@ -2168,17 +2168,19 @@ function AdminDashboard() {
                   </div>
 
                   <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                    <button className="btn-primary" onClick={() => {
+                    <button className="btn-primary" onClick={async () => {
                       if (newPanditName && newPanditSpec && newPanditExp) {
                         const fallbackImg = '/assets/male_pandit.png';
                         const assignedImg = newPanditImg && newPanditImg !== '/assets/avatar_placeholder.png' ? newPanditImg : fallbackImg;
+                        const isEdit = !!editingPanditId;
                         if (editingPanditId) {
-                          updatePandit(editingPanditId, { name: newPanditName, specialization: newPanditSpec, experience: newPanditExp, img: assignedImg });
+                          await updatePandit(editingPanditId, { name: newPanditName, specialization: newPanditSpec, experience: newPanditExp, img: assignedImg });
                           setEditingPanditId(null);
                         } else {
-                          addPandit({ name: newPanditName, specialization: newPanditSpec, experience: newPanditExp, status: 'Approved', img: assignedImg });
+                          await addPandit({ name: newPanditName, specialization: newPanditSpec, experience: newPanditExp, status: 'Approved', img: assignedImg });
                         }
                         setNewPanditName(''); setNewPanditSpec('Vedic Rituals'); setNewPanditExp('0-2 Years'); setNewPanditImg('');
+                        alert(isEdit ? 'Pandit details updated successfully!' : `Pandit "${newPanditName}" registered successfully!`);
                       } else {
                         alert('Please fill out all required pandit fields.');
                       }
