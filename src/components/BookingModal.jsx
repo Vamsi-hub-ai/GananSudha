@@ -326,6 +326,7 @@ export default function BookingModal({ selectedService, onClose, onBookingSucces
                   src={selectedService.img} 
                   alt={rawServiceName} 
                   style={{ width: '42px', height: '42px', borderRadius: '6px', objectFit: 'cover' }} 
+                  onError={(e) => { e.target.onerror = null; e.target.src = '/assets/sacred_pooja_ritual.jpg'; }}
                 />
               )}
               <div style={{ flex: 1 }}>

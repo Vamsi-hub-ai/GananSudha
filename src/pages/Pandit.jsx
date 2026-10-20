@@ -268,7 +268,10 @@ export default function Pandit() {
                 <img 
                   src={pandit.img || (pandit.gender === 'female' ? "/assets/female_pandit.png" : "/assets/male_pandit.png")} 
                   alt={pandit.name} 
-                  onError={(e)=>{e.target.src="https://via.placeholder.com/100?text=Pandit"}} 
+                  onError={(e) => { 
+                    e.target.onerror = null; 
+                    e.target.src = pandit.gender === 'female' ? "/assets/female_pandit.png" : "/assets/male_pandit.png"; 
+                  }} 
                 />
               </div>
               
@@ -564,7 +567,10 @@ export default function Pandit() {
                 <img
                   src={selectedProfilePandit.img || (selectedProfilePandit.gender === 'female' ? "/assets/female_pandit.png" : "/assets/male_pandit.png")}
                   alt={selectedProfilePandit.name}
-                  onError={(e) => { e.target.src = "https://via.placeholder.com/110?text=Pandit"; }}
+                  onError={(e) => { 
+                    e.target.onerror = null; 
+                    e.target.src = selectedProfilePandit.gender === 'female' ? "/assets/female_pandit.png" : "/assets/male_pandit.png"; 
+                  }}
                 />
               </div>
               <h3 className="pandit-modal-name">{selectedProfilePandit.name}</h3>

@@ -281,6 +281,7 @@ const DEFAULT_STORE = {
       status: 'Approved',
       gender: 'male',
       experience: '18+ years',
+      img: '/assets/gruhapravesham_pandit_1782492787455.png',
       created_at: new Date().toISOString()
     },
     {
@@ -295,13 +296,14 @@ const DEFAULT_STORE = {
       status: 'Approved',
       gender: 'male',
       experience: '22+ years',
+      img: '/assets/homam_specialist_1782492829402.png',
       created_at: new Date().toISOString()
     },
     {
       id: 3,
       username: 'pandita.gayatri@gnanasudha.com',
       password: 'password123',
-      name: 'Vidushi Gayatri Devi',
+      name: 'Manju',
       phone: '+91 98480 34567',
       specialization: 'Devi Poojas, Lalitha Sahasranamam & Chanting',
       rating: '4.9',
@@ -309,6 +311,22 @@ const DEFAULT_STORE = {
       status: 'Approved',
       gender: 'female',
       experience: '15+ years',
+      img: '/assets/female_pandit.png',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 4,
+      username: 'pandit.vamsi@gnanasudha.com',
+      password: 'password123',
+      name: 'vamsi',
+      phone: '+91 98480 45678',
+      specialization: 'Vedic Rituals',
+      rating: '5.0',
+      reviews: '12',
+      status: 'Approved',
+      gender: 'male',
+      experience: '0-2 Years',
+      img: '/assets/male_pandit.png',
       created_at: new Date().toISOString()
     }
   ],

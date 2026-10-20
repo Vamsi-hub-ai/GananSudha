@@ -125,3 +125,26 @@ The application will automatically organize files into:
 * `uploads/products/`
 * `uploads/thumbnails/`
 * `uploads/categories/`
+* `uploads/media/`
+
+---
+
+## 8. Fixing Missing Pandits & Broken Images
+
+If you previously deployed and noticed pandit photos missing, pandits not adding, or pooja cards displaying broken images:
+
+### Fast Fix Option A: Automatic Fix via App Restart
+1. Upload the updated `gnana-sudha-deploy.zip` to your Hostinger file manager (or `git pull origin main`).
+2. Run `npm install` and `npm run build` (or the updated build in `dist/` is already included).
+3. In Hostinger **Node.js Manager**, click **Restart**.
+4. The server automatically runs database migrations on startup:
+   - Upgrades `poojas.img`, `homams.img`, `pandits.img`, and `products.image` to `LONGTEXT`
+   - Adds `experience`, `img`, `languages`, `city`, `bio` to `pandits` table
+   - Makes `username` and `password` nullable so admin pandit registration works flawlessly
+   - Seeds default verified pandits and poojas if missing.
+
+### Fast Fix Option B: Manual SQL in phpMyAdmin (Instant)
+1. In Hostinger hPanel, go to **Databases** &rarr; open **phpMyAdmin** for your database.
+2. Click the **SQL** tab.
+3. Open [`backend/migrations/fix_pandits_and_images.sql`](file:///backend/migrations/fix_pandits_and_images.sql), copy all queries, paste into the box, and click **Go**.
+4. Hard refresh your browser (`Ctrl + Shift + R`). All images and pandit details will load immediately!

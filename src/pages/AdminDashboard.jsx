@@ -2022,7 +2022,7 @@ function AdminDashboard() {
                                   src={p.img || '/assets/product_pooja_kit.png'} 
                                   alt={p.name} 
                                   style={{ width: '38px', height: '38px', borderRadius: '8px', objectFit: 'cover', border: '1px solid #E5E7EB' }} 
-                                  onError={e => { e.target.src = '/assets/product_pooja_kit.png'; }}
+                                  onError={e => { e.target.onerror = null; e.target.src = '/assets/product_pooja_kit.png'; }}
                                 />
                                 <div>
                                   <div style={{ fontWeight: 600, color: '#111827' }}>{p.name}</div>
@@ -2170,11 +2170,13 @@ function AdminDashboard() {
                   <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
                     <button className="btn-primary" onClick={() => {
                       if (newPanditName && newPanditSpec && newPanditExp) {
+                        const fallbackImg = '/assets/male_pandit.png';
+                        const assignedImg = newPanditImg && newPanditImg !== '/assets/avatar_placeholder.png' ? newPanditImg : fallbackImg;
                         if (editingPanditId) {
-                          updatePandit(editingPanditId, { name: newPanditName, specialization: newPanditSpec, experience: newPanditExp, img: newPanditImg || null });
+                          updatePandit(editingPanditId, { name: newPanditName, specialization: newPanditSpec, experience: newPanditExp, img: assignedImg });
                           setEditingPanditId(null);
                         } else {
-                          addPandit({ name: newPanditName, specialization: newPanditSpec, experience: newPanditExp, status: 'Approved', img: newPanditImg || null });
+                          addPandit({ name: newPanditName, specialization: newPanditSpec, experience: newPanditExp, status: 'Approved', img: assignedImg });
                         }
                         setNewPanditName(''); setNewPanditSpec('Vedic Rituals'); setNewPanditExp('0-2 Years'); setNewPanditImg('');
                       } else {
@@ -2212,10 +2214,13 @@ function AdminDashboard() {
                             <td>
                               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                 <img 
-                                  src={p.img || '/assets/avatar_placeholder.png'} 
+                                  src={p.img && p.img !== '/assets/avatar_placeholder.png' ? p.img : (p.gender === 'female' ? '/assets/female_pandit.png' : '/assets/male_pandit.png')} 
                                   alt={p.name} 
                                   style={{ width: '38px', height: '38px', borderRadius: '50%', objectFit: 'cover', border: '1px solid #E5E7EB' }} 
-                                  onError={(e) => { e.target.src = "/assets/avatar_placeholder.png"; }} 
+                                  onError={(e) => { 
+                                    e.target.onerror = null;
+                                    e.target.src = p.gender === 'female' ? '/assets/female_pandit.png' : '/assets/male_pandit.png'; 
+                                  }} 
                                 />
                                 <div>
                                   <div style={{ fontWeight: 600, color: '#111827' }}>{p.name}</div>
@@ -2536,7 +2541,7 @@ function AdminDashboard() {
                                   src={h.img || '/assets/product_pooja_kit.png'} 
                                   alt={h.name} 
                                   style={{ width: '40px', height: '40px', borderRadius: '8px', objectFit: 'cover', border: '1px solid #E5E7EB' }} 
-                                  onError={e => { e.target.src = '/assets/product_pooja_kit.png'; }}
+                                  onError={e => { e.target.onerror = null; e.target.src = '/assets/homam_specialist_1782492829402.png'; }}
                                 />
                                 <div>
                                   <div style={{ fontWeight: 600, color: '#111827' }}>{h.name}</div>

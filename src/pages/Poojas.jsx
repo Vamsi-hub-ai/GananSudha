@@ -21,6 +21,36 @@ export default function Poojas() {
 
   const [bookingModalService, setBookingModalService] = useState(null);
 
+  const getPoojaImage = (service) => {
+    if (service && service.img && typeof service.img === 'string' && service.img.trim()) {
+      if (service.img.startsWith('/') || service.img.startsWith('http') || service.img.startsWith('data:image')) {
+        return service.img;
+      }
+      return `/${service.img.replace(/^\.?\//, '')}`;
+    }
+    const name = ((service && service.name) || '').toLowerCase();
+    if (name.includes('gruhapravesh') || name.includes('gruhapravesa') || name.includes('vaastu') || name.includes('vastu') || name.includes('bhumi')) {
+      return '/assets/gruhapravesham_pandit_1782492787455.png';
+    }
+    if (name.includes('satya') || name.includes('vratham') || name.includes('vratam') || name.includes('abhishekam') || name.includes('maheshwara')) {
+      return '/assets/satyanarayana_vratham_1782492802363.png';
+    }
+    if (name.includes('vivah') || name.includes('wedding') || name.includes('marriage')) {
+      return '/assets/vivaham_priest_1782492816322.png';
+    }
+    return '/assets/sacred_pooja_ritual.jpg';
+  };
+
+  const getHomamImage = (service) => {
+    if (service && service.img && typeof service.img === 'string' && service.img.trim()) {
+      if (service.img.startsWith('/') || service.img.startsWith('http') || service.img.startsWith('data:image')) {
+        return service.img;
+      }
+      return `/${service.img.replace(/^\.?\//, '')}`;
+    }
+    return '/assets/homam_specialist_1782492829402.png';
+  };
+
   const handleOpenBooking = (service, type = 'pooja') => {
     setBookingModalService({
       ...service,
@@ -225,7 +255,22 @@ export default function Poojas() {
             {topPoojas.map((service, idx) => (
               <div className="top-service-card" key={`pooja-${idx}`}>
                 <div className="card-badge">{idx + 1}</div>
-                <img src={service.img} alt={translateDynamic(service, 'name')} className="top-service-img" />
+                <img 
+                  src={getPoojaImage(service)} 
+                  alt={translateDynamic(service, 'name')} 
+                  className="top-service-img" 
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    const name = ((service && service.name) || '').toLowerCase();
+                    if (name.includes('gruhapravesh') || name.includes('gruhapravesa') || name.includes('vaastu') || name.includes('vastu') || name.includes('bhumi')) {
+                      e.target.src = '/assets/gruhapravesham_pandit_1782492787455.png';
+                    } else if (name.includes('satya') || name.includes('vratham') || name.includes('vratam') || name.includes('abhishekam')) {
+                      e.target.src = '/assets/satyanarayana_vratham_1782492802363.png';
+                    } else {
+                      e.target.src = '/assets/sacred_pooja_ritual.jpg';
+                    }
+                  }}
+                />
                 <h4 className="top-service-title">{translateDynamic(service, 'name')}</h4>
                 <p className="top-service-desc">{translateDynamic(service, 'desc')}</p>
                 <div style={{ position: 'relative', width: '100%', display: 'flex', flexDirection: 'column', padding: '12px 16px 16px', gap: '8px', alignItems: 'center' }}>
@@ -276,7 +321,15 @@ export default function Poojas() {
               {topHomams.map((service, idx) => (
                 <div className="top-service-card" key={`homam-${idx}`}>
                   <div className="card-badge">{idx + 1}</div>
-                  <img src={service.img} alt={translateDynamic(service, 'name')} className="top-service-img" />
+                  <img 
+                    src={getHomamImage(service)} 
+                    alt={translateDynamic(service, 'name')} 
+                    className="top-service-img" 
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = '/assets/homam_specialist_1782492829402.png';
+                    }}
+                  />
                   <h4 className="top-service-title">{translateDynamic(service, 'name')}</h4>
                   <p className="top-service-desc">{translateDynamic(service, 'desc')}</p>
                   <div style={{ position: 'relative', width: '100%', display: 'flex', flexDirection: 'column', padding: '12px 16px 16px', gap: '8px', alignItems: 'center' }}>
