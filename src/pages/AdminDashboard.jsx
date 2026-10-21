@@ -6020,7 +6020,7 @@ function AdminDashboard() {
             </div>
           )}
 
-          {activeMenu !== 'Dashboard' && activeMenu !== 'Bookings' && activeMenu !== 'Orders' && activeMenu !== 'Poojas' && activeMenu !== 'Pandits' && activeMenu !== 'Homams' && activeMenu !== 'Products' && activeMenu !== 'Categories' && activeMenu !== 'Inventory' && activeMenu !== 'Settings' && activeMenu !== 'Reports' && activeMenu !== 'Coupons' && activeMenu !== 'Customers' && activeMenu !== 'Analytics' && activeMenu !== 'Payments' && activeMenu !== 'Reviews' && activeMenu !== 'Banners' && activeMenu !== 'Consultations' && activeMenu !== 'Calendar & Festivals' && (
+          {activeMenu !== 'Dashboard' && activeMenu !== 'Bookings' && activeMenu !== 'Orders' && activeMenu !== 'Poojas' && activeMenu !== 'Pandits' && activeMenu !== 'Homams' && activeMenu !== 'Products' && activeMenu !== 'Categories' && activeMenu !== 'Inventory' && activeMenu !== 'Settings' && activeMenu !== 'Reports' && activeMenu !== 'Coupons' && activeMenu !== 'Customers' && activeMenu !== 'Analytics' && activeMenu !== 'Payments' && activeMenu !== 'Reviews' && activeMenu !== 'Banners' && activeMenu !== 'Consultations' && activeMenu !== 'Calendar & Festivals' && activeMenu !== 'YouTube Videos' && (
             <div>
               <div className="welcome-text" style={{ marginBottom: '24px' }}>
                 <h1>{activeMenu} Management</h1>

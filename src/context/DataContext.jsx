@@ -11,14 +11,210 @@ export const DEFAULT_PANDITS = [
   { id: 4, name: 'vamsi', specialization: 'Vedic Rituals', experience: '0-2 Years', rating: '5.0', reviews: '12', status: 'Approved', gender: 'male', img: '/assets/male_pandit.png', languages: 'Telugu, English', city: 'Hyderabad, Telangana' }
 ];
 
+export const DEFAULT_POOJAS = [
+  {
+    id: 1,
+    name: 'Sri Satyanarayana Swamy Vratham',
+    desc: 'Auspicious ritual dedicated to Lord Vishnu for peace, prosperity, removing obstacles, and family harmony.',
+    price: 3500,
+    discountPrice: 2999,
+    img: '/assets/satyanarayana_vratham_1782492802363.png'
+  },
+  {
+    id: 2,
+    name: 'Gruhapravesham Pooja',
+    desc: 'Sacred housewarming ceremony with Vastu Shanti and Navagraha blessings before entering your new home.',
+    price: 5500,
+    discountPrice: 4800,
+    img: '/assets/gruhapravesham_pandit_1782492787455.png'
+  },
+  {
+    id: 3,
+    name: 'Vivaham (Vedic Wedding Rituals)',
+    desc: 'Complete traditional wedding ceremonies performed strictly as per Vedic Shastras by senior scholarly priests.',
+    price: 15000,
+    discountPrice: 12500,
+    img: '/assets/vivaham_priest_1782492816322.png'
+  },
+  {
+    id: 4,
+    name: 'Nitya Devatha Archana & Daily Pooja',
+    desc: 'Daily devotional pooja performed at your home or office for divine positive vibrations and abundance.',
+    price: 1500,
+    discountPrice: 1200,
+    img: '/assets/daily_pooja_1782492845891.png'
+  }
+];
+
+export const DEFAULT_HOMAMS = [
+  {
+    id: 1,
+    name: 'Sri Maha Ganapathi Homam',
+    desc: 'Powerful Vedic fire ritual invoking Lord Ganesha to eliminate hurdles, bring auspicious beginnings, and ensure success.',
+    price: 4500,
+    discountPrice: 3800,
+    img: '/assets/homam_specialist_1782492829402.png'
+  },
+  {
+    id: 2,
+    name: 'Sudarshana Homam',
+    desc: 'Vedic fire ritual dedicated to Lord Sudarshana for protection against negative energies, health restoration, and victory.',
+    price: 5000,
+    discountPrice: 4200,
+    img: '/assets/homam_specialist_1782492829402.png'
+  },
+  {
+    id: 3,
+    name: 'Navagraha Homam',
+    desc: 'Homam performed to appease all nine planetary deities, pacifying graha doshas and blessing you with prosperity and health.',
+    price: 5500,
+    discountPrice: 4600,
+    img: '/assets/homam_specialist_1782492829402.png'
+  },
+  {
+    id: 4,
+    name: 'Maha Mrityunjaya Homam',
+    desc: 'Sacred havan dedicated to Lord Shiva for health recovery, longevity, rejuvenation, and freedom from fear.',
+    price: 6000,
+    discountPrice: 5100,
+    img: '/assets/homam_specialist_1782492829402.png'
+  }
+];
+
+export const DEFAULT_CATEGORIES = [
+  { id: 1, name: 'Pooja Samagri', slug: 'pooja-samagri', desc: 'Curated pure samagri for daily and festive poojas.', image: '/assets/product_kalash.png', iconname: 'Box', display_order: 1, status: 'active' },
+  { id: 2, name: 'Diyas & Lamps', slug: 'diyas-lamps', desc: 'Traditional brass akhand diyas, deepams and decorative brass lamps.', image: '/assets/product_diya.png', iconname: 'Flame', display_order: 2, status: 'active' },
+  { id: 3, name: 'Idols & Murtis', slug: 'idols-murtis', desc: 'Spiritual brass, panchaloha murthis, yantras and altar decor.', image: '/assets/ganesha_popup_clean.jpg', iconname: 'LayoutGrid', display_order: 3, status: 'active' },
+  { id: 4, name: 'Rudraksha & Malas', slug: 'rudraksha-malas', desc: 'Lab-tested genuine Nepal & Java Rudraksha beads and japa malas.', image: '/assets/product_rudraksha.png', iconname: 'Grid', display_order: 4, status: 'active' },
+  { id: 5, name: 'Pooja Kits', slug: 'pooja-kits', desc: 'Complete, curated pooja kits for every sacred ritual and deity ceremony.', image: '/assets/product_pooja_kit.png', iconname: 'Box', display_order: 5, status: 'active' },
+  { id: 6, name: 'Homam Samagri', slug: 'homam-samagri', desc: '108 pure shastra-compliant herbs, woods and offerings for holy havans.', image: '/assets/sacred_pooja_ritual.jpg', iconname: 'Flame', display_order: 6, status: 'active' },
+  { id: 7, name: 'Incense & Dhoop', slug: 'incense-dhoop', desc: 'Hand-rolled, temple-grade natural incense sticks and organic dhoop cups.', image: '/assets/product_pooja_kit.png', iconname: 'Sparkles', display_order: 7, status: 'active' },
+  { id: 8, name: 'Festival Essentials', slug: 'festival-essentials', desc: 'Special festive hampers and seasonal ritual essentials for all celebrations.', image: '/assets/product_pooja_kit.png', iconname: 'Book', display_order: 8, status: 'active' }
+];
+
+export const DEFAULT_PRODUCTS = [
+  {
+    id: 1,
+    name: 'Sampoorna Satyanarayana Swamy Pooja Kit',
+    slug: 'sampoorna-satyanarayana-pooja-kit',
+    desc: 'Complete authentic ritual box containing 32+ essential items including pure turmeric, kumkum, sacred yellow cloth, panchamrut samagri, batti, and vrat katha book.',
+    price: 999,
+    oldPrice: 1299,
+    categoryid: 1,
+    sku: 'PK-SATYA-01',
+    stock: 45,
+    rating: 4.9,
+    reviews: 128,
+    badge_text: 'Best Seller',
+    badge_type: 'bestseller',
+    image: '/assets/product_pooja_kit.png',
+    images: ['/assets/product_pooja_kit.png'],
+    featured: 1,
+    bestseller: 1,
+    status: 'active'
+  },
+  {
+    id: 2,
+    name: 'Pure Vedic Cow Ghee Diya Wicks (Pack of 100)',
+    slug: 'pure-cow-ghee-diya-wicks-100',
+    desc: 'Pre-soaked pure indigenous cow ghee cotton wicks infused with gentle camphor and sandalwood fragrance for effortless daily altar lighting.',
+    price: 299,
+    oldPrice: 399,
+    categoryid: 2,
+    sku: 'DY-GHEE-100',
+    stock: 85,
+    rating: 4.8,
+    reviews: 94,
+    badge_text: 'Popular',
+    badge_type: 'popular',
+    image: '/assets/product_diya.png',
+    images: ['/assets/product_diya.png'],
+    featured: 1,
+    bestseller: 0,
+    status: 'active'
+  },
+  {
+    id: 3,
+    name: 'Authentic Ashtagandha Chandan & Roli Kumkum Set',
+    slug: 'authentic-ashtagandha-chandan-kumkum-set',
+    desc: 'Traditional temple-grade fragrance paste set made from 8 sacred herbs combined with natural turmeric roli kumkum for daily tilak.',
+    price: 199,
+    oldPrice: 249,
+    categoryid: 1,
+    sku: 'KC-ASHTA-01',
+    stock: 120,
+    rating: 4.9,
+    reviews: 83,
+    badge_text: 'Natural',
+    badge_type: 'natural',
+    image: '/assets/product_kalash.png',
+    images: ['/assets/product_kalash.png'],
+    featured: 1,
+    bestseller: 0,
+    status: 'active'
+  },
+  {
+    id: 4,
+    name: 'Handcrafted Brass Pancha Aarti Diya Lamp',
+    slug: 'handcrafted-brass-pancha-aarti-diya',
+    desc: 'Heavy-gauge authentic pure brass five-faced ritual aarti lamp with carved wooden handle for daily puja and grand temple aradhana.',
+    price: 699,
+    oldPrice: 899,
+    categoryid: 2,
+    sku: 'DY-BRASS-5',
+    stock: 35,
+    rating: 5.0,
+    reviews: 47,
+    badge_text: 'Handmade',
+    badge_type: 'handcrafted',
+    image: '/assets/product_diya.png',
+    images: ['/assets/product_diya.png'],
+    featured: 1,
+    bestseller: 0,
+    status: 'active'
+  },
+  {
+    id: 5,
+    name: 'Certified 5-Mukhi Indonesian Rudraksha Japa Mala',
+    slug: 'certified-5-mukhi-rudraksha-japa-mala',
+    desc: 'Natural 5-mukhi small 7mm Rudraksha beads strung in traditional knotting with tassel for Lord Shiva japa chanting and personal protection.',
+    price: 1299,
+    oldPrice: 1799,
+    categoryid: 4,
+    sku: 'RD-5M-MALA',
+    stock: 28,
+    rating: 4.9,
+    reviews: 52,
+    badge_text: 'Lab Certified',
+    badge_type: 'certified',
+    image: '/assets/product_rudraksha.png',
+    images: ['/assets/product_rudraksha.png'],
+    featured: 1,
+    bestseller: 1,
+    status: 'active'
+  }
+];
+
+export const DEFAULT_COUPONS = [
+  { id: 1, code: 'DIVINE10', discount: 10, expiry: '2027-12-31' },
+  { id: 2, code: 'FESTIVE20', discount: 20, expiry: '2027-12-31' }
+];
+
+export const DEFAULT_CONSULTATIONS = [
+  { id: 'muhurtam', title: 'Muhurtam', price: 1000, discountPrice: 900 },
+  { id: 'vaastu', title: 'Vaastu Consultation', price: 1000, discountPrice: 900 },
+  { id: 'horoscope', title: 'Horoscope Reading', price: 1000, discountPrice: 900 },
+  { id: 'pooja', title: 'Book Pandit & Pooja', price: 1000, discountPrice: 900 }
+];
+
 export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
-  const [poojas, setPoojas] = useState([]);
-  const [homams, setHomams] = useState([]);
+  const [poojas, setPoojas] = useState(DEFAULT_POOJAS);
+  const [homams, setHomams] = useState(DEFAULT_HOMAMS);
   const [pandits, setPandits] = useState(DEFAULT_PANDITS);
-  const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState(DEFAULT_CATEGORIES);
+  const [products, setProducts] = useState(DEFAULT_PRODUCTS);
   const [paymentSettings, setPaymentSettings] = useState(() => {
     try {
       const saved = localStorage.getItem('gs_payment_settings');
@@ -60,9 +256,9 @@ export const DataProvider = ({ children }) => {
   });
   const [orders, setOrders] = useState([]);
   const [bookings, setBookings] = useState([]);
-  const [coupons, setCoupons] = useState([]);
+  const [coupons, setCoupons] = useState(DEFAULT_COUPONS);
   const [appliedCoupon, setAppliedCoupon] = useState(null);
-  const [consultations, setConsultations] = useState([]);
+  const [consultations, setConsultations] = useState(DEFAULT_CONSULTATIONS);
   const [wishlist, setWishlist] = useState(() => {
     try {
       const saved = localStorage.getItem('gs_wishlist');
@@ -81,36 +277,56 @@ export const DataProvider = ({ children }) => {
           fetch(`${API_URL}/consultations`), fetch(`${API_URL}/bookings`)
         ]);
         
-        if(poojasRes.ok) setPoojas(await poojasRes.json());
-        if(homamsRes.ok) setHomams(await homamsRes.json());
-        if(panditsRes.ok) {
+        if (poojasRes && poojasRes.ok) {
+          const p = await poojasRes.json();
+          if (Array.isArray(p) && p.length > 0) setPoojas(p);
+        }
+        if (homamsRes && homamsRes.ok) {
+          const h = await homamsRes.json();
+          if (Array.isArray(h) && h.length > 0) setHomams(h);
+        }
+        if (panditsRes && panditsRes.ok) {
           const pData = await panditsRes.json();
           setPandits(Array.isArray(pData) && pData.length > 0 ? pData : DEFAULT_PANDITS);
-        } else {
-          setPandits(DEFAULT_PANDITS);
         }
-        if(catRes.ok) {
+        if (catRes && catRes.ok) {
           const cData = await catRes.json();
-          setCategories(Array.isArray(cData) ? cData : (cData.data || []));
+          const arr = Array.isArray(cData) ? cData : (cData.data || []);
+          if (arr.length > 0) setCategories(arr);
         }
-        if(prodRes.ok) {
+        if (prodRes && prodRes.ok) {
           const pData = await prodRes.json();
-          setProducts(Array.isArray(pData) ? pData : (pData.data || []));
+          const arr = Array.isArray(pData) ? pData : (pData.data || []);
+          if (arr.length > 0) setProducts(arr);
         }
-        if(custRes.ok) setCustomers(await custRes.json());
-        if(adminRes.ok) setAdminUsers(await adminRes.json());
-        if(coupRes.ok) setCoupons(await coupRes.json());
-        if(ordRes.ok) {
+        if (custRes && custRes.ok) {
+          const c = await custRes.json();
+          if (Array.isArray(c) && c.length > 0) setCustomers(c);
+        }
+        if (adminRes && adminRes.ok) {
+          const a = await adminRes.json();
+          if (Array.isArray(a) && a.length > 0) setAdminUsers(a);
+        }
+        if (coupRes && coupRes.ok) {
+          const c = await coupRes.json();
+          if (Array.isArray(c) && c.length > 0) setCoupons(c);
+        }
+        if (ordRes && ordRes.ok) {
           const oData = await ordRes.json();
-          setOrders(Array.isArray(oData) ? oData : (oData.data || []));
+          const arr = Array.isArray(oData) ? oData : (oData.data || []);
+          if (arr.length > 0) setOrders(arr);
         }
-        if(consultRes.ok) setConsultations(await consultRes.json());
-        if(bkgRes && bkgRes.ok) {
+        if (consultRes && consultRes.ok) {
+          const c = await consultRes.json();
+          if (Array.isArray(c) && c.length > 0) setConsultations(c);
+        }
+        if (bkgRes && bkgRes.ok) {
           const bData = await bkgRes.json();
-          setBookings(Array.isArray(bData) ? bData : (bData.data || []));
+          const arr = Array.isArray(bData) ? bData : (bData.data || []);
+          if (arr.length > 0) setBookings(arr);
         }
       } catch (err) {
-        console.error("Error fetching from API:", err);
+        console.error("Error fetching from API, retaining authentic defaults:", err);
       }
     };
     fetchData();

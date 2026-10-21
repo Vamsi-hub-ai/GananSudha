@@ -12,6 +12,7 @@ const {
     ensureFestivalsTable 
 } = require('./panchangService');
 const { ensureBannersTable } = require('./bannerRouter');
+const { ensureYoutubeVideosTable } = require('./youtubeRouter');
 
 const app = express();
 app.use(cors());
@@ -203,43 +204,9 @@ const runMigrations = async () => {
 
     // Ensure youtube_videos table exists and seed if empty
     try {
-        await pool.query(`
-            CREATE TABLE IF NOT EXISTS youtube_videos (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                title VARCHAR(255) NOT NULL,
-                title_te VARCHAR(255) NULL,
-                youtube_url VARCHAR(500) NOT NULL,
-                youtube_video_id VARCHAR(50) NOT NULL,
-                description TEXT NULL,
-                description_te TEXT NULL,
-                category VARCHAR(100) DEFAULT 'Pooja',
-                thumbnail_url VARCHAR(500) NULL,
-                display_order INT DEFAULT 0,
-                is_homepage_featured BOOLEAN DEFAULT TRUE,
-                status VARCHAR(50) DEFAULT 'published',
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                INDEX idx_yt_status (status),
-                INDEX idx_yt_featured (is_homepage_featured),
-                INDEX idx_yt_order (display_order)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-        `);
-        const [existingVideos] = await pool.query('SELECT COUNT(*) as cnt FROM youtube_videos');
-        if (existingVideos && existingVideos[0] && existingVideos[0].cnt === 0) {
-            await pool.query(`
-                INSERT IGNORE INTO youtube_videos 
-                (id, title, title_te, youtube_url, youtube_video_id, description, description_te, category, thumbnail_url, display_order, is_homepage_featured, status) VALUES
-                (1, 'Sri Maha Ganapathi Homam & Sankalpam Rituals', 'శ్రీ మహా గణపతి హోమం & సంకల్ప పూజా విధానం', 'https://www.youtube.com/watch?v=kYJp38X-9_k', 'kYJp38X-9_k', 'Witness the sacred invocation of Lord Ganesha by scholarly Vedic pandits for removing obstacles and bringing prosperity.', 'విఘ్న నివారణ మరియు సకల కార్యసిద్ధి కొరకు విద్వత్ పండితులచే నిర్వహించబడిన సంప్రదాయ శ్రీ మహాగణపతి హోమ దృశ్యాలు.', 'Homam', 'https://img.youtube.com/vi/kYJp38X-9_k/hqdefault.jpg', 1, 1, 'published'),
-                (2, 'Sri Satyanarayana Swamy Vratam Complete Katha & Pooja', 'శ్రీ సత్యనారాయణ స్వామి వ్రత కథ & సంపూర్ణ పూజ', 'https://www.youtube.com/watch?v=0h6Q5XQ_0lE', '0h6Q5XQ_0lE', 'Step-by-step sacred Satyanarayana Swamy Pooja recitation, Kalasha sthapana, and prasadam offerings.', 'కలశస్థాపన, నవగ్రహ పూజ, వ్రత కథా శ్రవణం మరియు ప్రసాద వితరణతో కూడిన సంపూర్ణ సత్యనారాయణ వ్రత పూజా విధానం.', 'Pooja', 'https://img.youtube.com/vi/0h6Q5XQ_0lE/hqdefault.jpg', 2, 1, 'published'),
-                (3, 'Maha Mrityunjaya Homam for Health, Healing & Longevity', 'ఆరోగ్య ఆయుర్వృద్ధి కొరకు మహా మృత్యుంజయ హోమం', 'https://www.youtube.com/watch?v=J9fP87Z8k0I', 'J9fP87Z8k0I', 'Vedic recitation of the sacred Tryambakam mantra with 108 ahutis of amrita valli and sesame oblations.', 'దీర్ఘకాలిక అనారోగ్య నివారణ, ఆయురారోగ్య రక్షణ కొరకు 108 అమృతవల్లి ఆహుతులతో కూడిన మహా మృత్యుంజయ హవనం.', 'Homam', 'https://img.youtube.com/vi/J9fP87Z8k0I/hqdefault.jpg', 3, 1, 'published'),
-                (4, 'Sacred Shiva Linga Rudrabhishekam with Namakam & Chamakam', 'శ్రీ రుద్రాభిషేకం (నమకం & చమక సహిత శివ పూజ)', 'https://www.youtube.com/watch?v=M5A7D8K9l4s', 'M5A7D8K9l4s', 'Holy abhishekam with milk, honey, sugarcane juice, and sacred vibhooti performed by senior purohits.', 'క్షీర, మధు, ఇక్షురస, భస్మ అభిషేకములతో వేద పండితులచే శాస్త్రోక్తంగా నిర్వహించబడే దివ్య రుద్రాభిషేక దర్శనం.', 'Pooja', 'https://img.youtube.com/vi/M5A7D8K9l4s/hqdefault.jpg', 4, 1, 'published'),
-                (5, 'Navagraha Shanti Homam & Dosha Nivarana Vidhanam', 'నవగ్రహ శాంతి హోమం & దోష నివారణ పద్ధతి', 'https://www.youtube.com/watch?v=P8m4F9A2b3c', 'P8m4F9A2b3c', 'Harmonizing the planetary influences through nine sacred grains and dedicated Vedic graha suktams.', 'జాతక దోషాల ఉపశమనం, గ్రహ శాంతి మరియు కుటుంబ క్షేమం కొరకు నవధాన్య ఆహుతులతో నిర్వహించే శాంతి హోమం.', 'Spiritual Guidance', 'https://img.youtube.com/vi/P8m4F9A2b3c/hqdefault.jpg', 5, 1, 'published'),
-                (6, 'Sri Lakshmi Kubera Pooja for Abundance & Financial Harmony', 'సిరిసంపదల కొరకు శ్రీ లక్ష్మీ కుబేర పూజా విధానం', 'https://www.youtube.com/watch?v=T6v8N4Q1d7e', 'T6v8N4Q1d7e', 'Divine worship of Goddess Maha Lakshmi and Lord Kubera with lotus flowers and kumkum archana.', 'కమల పుష్పాలు, కుంకుమార్చన మరియు కనకధారా స్తోత్ర పారాయణంతో అమ్మవారి దివ్య అనుగ్రహం పొందే పూజ.', 'Festivals', 'https://img.youtube.com/vi/T6v8N4Q1d7e/hqdefault.jpg', 6, 1, 'published')
-            `);
-            console.log("[DB] Default youtube_videos seeded successfully.");
-        }
+        await ensureYoutubeVideosTable();
     } catch (e) {
-        console.warn("[DB] Youtube videos seed check:", e.message);
+        console.warn("[DB] Ensure youtube_videos table warning:", e.message);
     }
 
     // Seed default pandits if table is empty
