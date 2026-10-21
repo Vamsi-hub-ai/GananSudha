@@ -501,6 +501,53 @@ const DEFAULT_STORE = {
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString()
     }
+  ],
+  banners: [
+    {
+      id: 1,
+      title: 'Authentic Vedic Poojas & Homams',
+      subtitle: 'Experience traditional rituals performed by verified Vedic priests in the comfort of your home.',
+      image_path: '/assets/hero_illustration_1782464564369.png',
+      mobile_image_path: '/assets/hero_illustration_1782464564369.png',
+      alt_text: 'Vedic Poojas & Homams',
+      cta_text: 'Book a Pooja',
+      cta_url: '/poojas',
+      display_order: 1,
+      status: 'active',
+      start_at: null,
+      end_at: null,
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 2,
+      title: 'Premium Spiritual Store & Samagri',
+      subtitle: 'Handpicked, 100% pure and shastra-compliant items delivered directly to your doorstep.',
+      image_path: '/assets/product_pooja_kit.png',
+      mobile_image_path: '/assets/product_pooja_kit.png',
+      alt_text: 'Spiritual Store Samagri',
+      cta_text: 'Explore Shop',
+      cta_url: '/shop',
+      display_order: 2,
+      status: 'active',
+      start_at: null,
+      end_at: null,
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 3,
+      title: 'Authoritative Drik Ganita Telugu Panchangam',
+      subtitle: 'Accurate daily Tithi, Nakshatram, Rahu Kalam, and Hindu festival calendar for AP & Telangana.',
+      image_path: '/assets/hero_bg.png',
+      mobile_image_path: '/assets/hero_bg.png',
+      alt_text: 'Telugu Amanta Panchangam Calendar',
+      cta_text: 'View Calendar',
+      cta_url: '/',
+      display_order: 3,
+      status: 'active',
+      start_at: null,
+      end_at: null,
+      created_at: new Date().toISOString()
+    }
   ]
 };
 

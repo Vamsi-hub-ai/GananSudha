@@ -11,6 +11,7 @@ const {
     calculateAstronomicalFestivalsForMonth, 
     ensureFestivalsTable 
 } = require('./panchangService');
+const { ensureBannersTable } = require('./bannerRouter');
 
 const app = express();
 app.use(cors());
@@ -191,6 +192,13 @@ const runMigrations = async () => {
         await ensureFestivalsTable();
     } catch (e) {
         console.warn("[DB] Ensure festivals table warning:", e.message);
+    }
+
+    // Ensure banners table exists and seed defaults if empty
+    try {
+        await ensureBannersTable();
+    } catch (e) {
+        console.warn("[DB] Ensure banners table warning:", e.message);
     }
 
     // Ensure youtube_videos table exists and seed if empty
